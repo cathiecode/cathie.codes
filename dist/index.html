@@ -16,9 +16,35 @@
             text-align: center;
         }
         .logo {
-            width: 100%;
-            max-height: 6em;
+            position: relative;
             margin-bottom: 3em;
+            width: 75%;
+            max-height: 6em;
+            animation: ease-out logo-animation 2s 0.5s both;
+        }
+        @keyframes logo-animation {
+            0% {
+                filter: drop-shadow(0vw 0vw #09f) drop-shadow(-0vw -0vw #f0f);
+            }
+            50% {
+                filter: drop-shadow(0.25vw 0.25vw #09f) drop-shadow(-0vw -0vw #f0f);
+            }
+            100% {
+                filter: drop-shadow(0.25vw 0.25vw #09f) drop-shadow(-0.25vw -0.25vw #f0f);
+            }
+        }
+        .delay-popup {
+            animation: ease-out delay-popup 1s 2.5s both;
+        }
+        @keyframes delay-popup {
+            from {
+                transform: translateY(20%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
         .sns-link {
             display: inline-block;
@@ -27,6 +53,8 @@
             height: 3em;
             margin: 0 1.5em;
             vertical-align: middle;
+            transform: translateY(0);
+            transition: transform 0.1s ease-out;
         }
         .sns-button:hover {
             transform: translateY(-10%);
@@ -35,13 +63,17 @@
 </head>
 <body>
     <div class="box">
-        <img src="at_cathiecode.svg" class="logo" alt="@cathiecode">
-        <a href="https://twitter.com/cathiecode" class="sns-link">
-            <img src="twitter.svg" alt="Twitter" class="sns-button">
-        </a>
-        <a href="https://github.com/cathiecode" class="sns-link">
-            <img src="github.svg" alt="Github" class="sns-button">
-        </a>
+        <div>
+            <img src="at_cathiecode.svg" alt="@cathiecode" class="logo">
+        </div>
+        <div class="delay-popup">
+            <a href="https://twitter.com/cathiecode" class="sns-link">
+                <img src="twitter.svg" alt="Twitter" class="sns-button">
+            </a>
+            <a href="https://github.com/cathiecode" class="sns-link">
+                <img src="github.svg" alt="Github" class="sns-button">
+            </a>
+        </div>
     </div>
 </body>
 </html>
