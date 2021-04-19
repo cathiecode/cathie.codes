@@ -109,7 +109,7 @@
 
     <script>
         function update_size() {
-            document.querySelectorAll(".logo").forEach(function() {
+            document.querySelectorAll(".logo").forEach(function(elm) {
                 elm.style.fontSize = (elm.getBoundingClientRect().width / 100).toString() + "px";
                 console.log(elm.style.fontSize);
             })
