@@ -82,3 +82,40 @@
 .sns-button:hover {
     transform: translateY(-10%);
 }
+
+.portfolio-container {
+    margin: auto;
+    width: 100%;
+}
+
+@media screen and (min-width: 600px) {
+    .portfolio-container {
+        width: 75%;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .portfolio-container {
+        width: 50%;
+    }
+}
+
+.portfolio-container__item {
+    
+}
+
+.portfolio-container__item__main {
+    text-align: center;
+}
+
+.portfolio-container__item div {
+    width: 50%;
+}
+
+.portfolio-container__item:nth-child(odd) div {
+    float: right;
+}
+
+.portfolio-container__item:nth-child(even) div {
+    float: left;
+}
