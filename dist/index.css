@@ -1,0 +1,79 @@
+.box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 75%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    text-align: center;
+}
+.logo-container {
+    position: relative;
+    height: 6em;
+    margin-bottom: 3em;
+    fill: #000;
+}
+.logo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.logo-main {
+    fill: #fff;
+}
+.logo-shadow-1 {
+    fill: #09f;
+    animation: logo-shadow-1 1s ease-in-out 0.5s normal both;
+}
+.logo-shadow-2 {
+    fill: #f0f;
+    animation: logo-shadow-2 1s ease-in-out 1.5s normal both;
+}
+@keyframes logo-shadow-1 {
+    from {
+        opacity: 0;
+        transform: translate(0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0.25em, 0.25em);
+    }
+}
+@keyframes logo-shadow-2 {
+    from {
+        opacity: 0;
+        transform: translate(0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-0.25em, -0.25em);
+    }
+}
+.delay-popup {
+    animation: ease-out delay-popup 1s 2.5s both;
+}
+@keyframes delay-popup {
+    from {
+        transform: translateY(20%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+.sns-link {
+    display: inline-block;
+}
+.sns-button {
+    height: 3em;
+    margin: 0 1.5em;
+    vertical-align: middle;
+    transform: translateY(0);
+    transition: transform 0.1s ease-out;
+}
+.sns-button:hover {
+    transform: translateY(-10%);
+}
