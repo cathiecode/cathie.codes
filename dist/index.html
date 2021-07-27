@@ -5,27 +5,100 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cathie.codes</title>
+    <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div class="box">
-        <div class="logo-container">
-            <svg class="logo logo-shadow logo-shadow-2"><use xlink:href="#logo-svg" /></svg>
-            <svg class="logo logo-shadow logo-shadow-1"><use xlink:href="#logo-svg" /></svg>
-            <svg class="logo logo-main"><use xlink:href="#logo-svg" /></svg>
-            <!--<img src="at_cathiecode.svg" alt="@cathiecode" class="logo logo-shadow logo-shadow-1">
-            <img src="at_cathiecode.svg" alt="@cathiecode" class="logo logo-shadow logo-shadow-2">
-            <img src="at_cathiecode.svg" alt="@cathiecode" class="logo logo-main">-->
-        </div>
-        <div class="delay-popup">
-            <a href="https://twitter.com/cathiecode" class="sns-link">
-                <img src="twitter.svg" alt="Twitter" class="sns-button">
-            </a>
-            <a href="https://github.com/cathiecode" class="sns-link">
-                <img src="github.svg" alt="Github" class="sns-button">
-            </a>
+    <div class="box-container">
+        <div class="box">
+            <div class="logo-container">
+                <svg class="logo logo-shadow logo-shadow-2"><use xlink:href="#logo-svg" /></svg>
+                <svg class="logo logo-shadow logo-shadow-1"><use xlink:href="#logo-svg" /></svg>
+                <svg class="logo logo-main"><use xlink:href="#logo-svg" /></svg>
+                <!--<img src="at_cathiecode.svg" alt="@cathiecode" class="logo logo-shadow logo-shadow-1">
+                <img src="at_cathiecode.svg" alt="@cathiecode" class="logo logo-shadow logo-shadow-2">
+                <img src="at_cathiecode.svg" alt="@cathiecode" class="logo logo-main">-->
+            </div>
+            <div class="delay-popup">
+                <a href="https://twitter.com/cathiecode" class="sns-link">
+                    <img src="twitter.svg" alt="Twitter" class="sns-button">
+                </a>
+                <a href="https://github.com/cathiecode" class="sns-link">
+                    <img src="github.svg" alt="Github" class="sns-button">
+                </a>
+            </div>
         </div>
     </div>
+
+    <img class="portfolio-arrows" src="./assets/moving-arrows.svg" alt="下へ進んでください">
+
+    <div class="portfolio-container">
+        <h1>Portfolio</h1>
+        <div class="portfolio-container__item">
+            <div class="portfolio-container__item__main">
+                <h2>リブロ・イラストラド</h2>
+                <img src="./assets/portfolio/libro_ilustrado/title.png" alt="" class="portfolio-container__item__main__image">
+            </div>
+            <div class="portfolio-container__item__description">
+                <h3>概要</h3>
+                <p>
+                    初めて製作したゲーム作品です。
+                    「アクションパズルブロック崩しRPG」。
+                </p>
+                <h3>ストーリー</h3>
+                <p>
+                    ある日絵本を見てみると真っ黒に塗りつぶされていた！？
+                    しかも知らない絵が動いてる…<br>
+                </p>
+                <p>
+                    ボールを触れる「絵本のあなた」とシールを使える「現実のあなた」。
+                    協力しあって、塗りつぶされた絵本の世界に豊かな色彩を取り戻そう。
+                </p>
+                <h3>技術</h3>
+                <ul class="portfolio-container__item__description__technologies">
+                    <li>使用言語: Procossing(Java系言語)</li>
+                    <li>グラフィック: Krita, GIMP, Inkscape</li>
+                    <li>コードホスティング: Git, GitHub</li>
+                    <li>その他: VSCode, InnoSetup</li>
+                </ul>
+                <h3>ダウンロード</h3>
+                <a href="https://drive.google.com/drive/u/0/folders/1bvAnEat62zKI7v_Za7_VDzZTrL7rglU2">Googleドライブ</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="footer">
+        <div class="footer__container">
+            <h2>自己紹介</h2>
+            <h3>ハンドルネーム</h3>
+            <p>キャサリン・コード(@cathiecode)</p>
+            <h3>好きな技術</h3>
+            <h4>Web系</h4>
+            <ul>
+                <li>Web三種の神器（HTML, CSS, JS）</li>
+                <li>Node.js</li>
+                <li>React</li>
+            </ul>
+            <h4>その他系</h4>
+            <ul>
+                <li>ハイブリッドアプリ（HTMLとかでアプリを作るやつです、Reactを組み合わせると楽しい）</li>
+                <li>GNU/Linux（Arch Linuxをデスクトップで使っています）</li>
+                <li>Node.js（Webでない分野でも使えます）</li>
+                <li>Rust（これは完全に趣味）</li>
+            </ul>
+            <h3>趣味</h3>
+            <h4>Webアプリ開発</h4>
+            <p>
+                Webアプリを作っては壊しを繰り返しています。（おかねがないので…）
+                Web以外の技術を組み合わせて作ることが多いので無料ホスティングサービスとかに乗り切らずに消してしまうことが多い。
+            </p>
+            <h4>デスクトップ GNU/Linux</h4>
+            <p>
+                Web系の開発をするときに便利なので使っていたら普段使いの環境になってしまいました。
+                Arch Linux を主に使っています。
+            </p>
+        </div>
+    </section>
 
     <script>
         function update_size() {
