@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="64.186mm" height="39.473mm" version="1.1" viewBox="0 0 64.186 39.473" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(-25.439 -168.45)" fill="none" stroke="#666" stroke-width=".26458px">
+        <path id="arrow-1" d="m35.499 178.57 22.033 11.265 22.033-11.265"/>
+        <path id="arrow-3" d="m35.499 186.51 22.033 11.265 22.033-11.265"/>
+        <path id="arrow-2" d="m35.499 182.54 22.033 11.265 22.033-11.265"/>
+    </g>
+       <style>
+        #arrow-1 {
+            /* 3500msのオフセットはindex.cssの矢印が出るまでの猶予時間 */
+            animation: arrow-move 2s 3500ms both infinite;
+        }
+
+        #arrow-2 {
+            animation: arrow-move 2s 3700ms both infinite;
+        }
+
+        #arrow-3 {
+            animation: arrow-move 2s 3900ms both infinite;
+        }
+
+        @keyframes arrow-move {
+            0% {
+                transform: translateY(-10%);
+                opacity: 0;
+            }
+
+            50% {
+                transform: translateY(0%);
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</svg>
