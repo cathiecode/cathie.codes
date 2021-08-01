@@ -51,10 +51,10 @@ body {
 }
 .sns-link {
     display: inline-block;
+    margin:  1.5em;
 }
 .sns-button {
     height: 3em;
-    margin: 0 1.5em;
     vertical-align: middle;
     transform: translateY(0);
     transition: transform 0.1s ease-out;
