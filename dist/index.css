@@ -245,7 +245,7 @@ body {
     height: 300%;
     animation: button-color-cycle 1500ms linear 0ms infinite normal both;
     animation-play-state: paused;
-    background: linear-gradient(to right, #f0f, #1ef, #f0f, #1ef);
+    background: linear-gradient(to right, #f0f, #09f, #f0f, #09f);
     background-repeat: repeat;
     transform-origin: 50%, 50%;
     top: 0;
