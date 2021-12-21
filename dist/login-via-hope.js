@@ -27,7 +27,7 @@ t.body = (children) => { children.forEach(child => document.body.appendChild(chi
 
 // End of tinydom
 
-const BASE_URL = "https://cathie.codes/";
+const BASE_URL = "https://cathie.codes";
 const FUNCTION_URL = `${BASE_URL}/.netlify/functions/login-via-hope`;
 const HOPE_LOGIN_URL = `https://hope.c.fun.ac.jp/cas/login?service=${encodeURI(FUNCTION_URL)}`;
 
