@@ -72,7 +72,7 @@ document.head.appendChild(t("style")({})([t.text(`
 .loginBox {
   position: fixed;
   display: inline-block;
-  bottom: 8px;
+  top: 8px;
   right: 8px;
   border: solid 1px #eee;
   min-width: 200px;
