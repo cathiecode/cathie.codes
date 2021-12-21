@@ -1,3 +1,6 @@
+/*! js-cookie v3.0.1 | MIT */
+!function (e, t) { "object" == typeof exports && "undefined" != typeof module ? module.exports = t() : "function" == typeof define && define.amd ? define(t) : (e = e || self, function () { var n = e.Cookies, o = e.Cookies = t(); o.noConflict = function () { return e.Cookies = n, o } }()) }(this, (function () { "use strict"; function e(e) { for (var t = 1; t < arguments.length; t++) { var n = arguments[t]; for (var o in n) e[o] = n[o] } return e } return function t(n, o) { function r(t, r, i) { if ("undefined" != typeof document) { "number" == typeof (i = e({}, o, i)).expires && (i.expires = new Date(Date.now() + 864e5 * i.expires)), i.expires && (i.expires = i.expires.toUTCString()), t = encodeURIComponent(t).replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent).replace(/[()]/g, escape); var c = ""; for (var u in i) i[u] && (c += "; " + u, !0 !== i[u] && (c += "=" + i[u].split(";")[0])); return document.cookie = t + "=" + n.write(r, t) + c } } return Object.create({ set: r, get: function (e) { if ("undefined" != typeof document && (!arguments.length || e)) { for (var t = document.cookie ? document.cookie.split("; ") : [], o = {}, r = 0; r < t.length; r++) { var i = t[r].split("="), c = i.slice(1).join("="); try { var u = decodeURIComponent(i[0]); if (o[u] = n.read(c, u), e === u) break } catch (e) { } } return e ? o[e] : o } }, remove: function (t, n) { r(t, "", e({}, n, { expires: -1 })) }, withAttributes: function (n) { return t(this.converter, e({}, this.attributes, n)) }, withConverter: function (n) { return t(e({}, this.converter, n), this.attributes) } }, { attributes: { value: Object.freeze(o) }, converter: { value: Object.freeze(n) } }) }({ read: function (e) { return '"' === e[0] && (e = e.slice(1, -1)), e.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent) }, write: function (e) { return encodeURIComponent(e).replace(/%(2[346BF]|3[AC-F]|40|5[BDE]|60|7[BCD])/g, decodeURIComponent) } }, { path: "/" }) }));
+
 // tinydom
 
 t = (name) => (attributes) => (children) => {
@@ -36,21 +39,35 @@ const loginButton = (text, onClick) => {
 }
 
 const loginBox = () => {
-  const query = document.location.search.substring(1).split('&').map((p) => p.split('=')).reduce((obj, e) => ({ ...obj, [e[0]]: e[1] }), {});
-  switch (query.authStatus) {
+  switch (Cookies.get("authStatus")) {
     case undefined:
-      return [loginButton("HOPEでログイン", () => { location.href = HOPE_LOGIN_URL })]
+      return [
+        t.div({ className: "loginBox__header" })([t.text("未来大生ですか?"), t.button({ className: "loginBox__header__close", onclick: () => { document.getElementById("login-via-hope-box").remove() } })([])]),
+        t.div({ className: "loginBox__body" })([loginButton("HOPEでログイン", () => { location.href = HOPE_LOGIN_URL })])
+      ]
     case "error":
       return [
-        t.text("ログインに失敗しました"),
-        loginButton("HOPEでログイン", () => { location.href = HOPE_LOGIN_URL })
+        t.div({ className: "loginBox__header" })([t.text("ログインに失敗しました"), t.button({ className: "loginBox__header__close", onclick: () => { document.getElementById("login-via-hope-box").remove() } })([])]),
+        t.div({ className: "loginBox__body" })([loginButton("HOPEでログイン", () => { location.href = HOPE_LOGIN_URL })])
       ]
     case "ok":
-      return [t.text(`ようこそ、${query.authUser}さん`)]
+      return [
+        t.div({ className: "loginBox__body" })([t.text(`${Cookies.get("authUser")}としてログイン中`)])
+      ]
   }
 }
 
-t.body([t.div({ className: "loginBox" })(loginBox())])
+const query = document.location.search.substring(1).split('&').map((p) => p.split('=')).reduce((obj, e) => ({ ...obj, [e[0]]: e[1] }), {});
+
+if (query.authStatus) {
+  Cookies.set("authStatus", query.authStatus);
+}
+if (query.authUser) {
+  Cookies.set("authUser", query.authUser);
+}
+
+t.body([t.div({ id: "login-via-hope-box", className: "loginBox" })(loginBox())])
+
 document.head.appendChild(t("style")({})([t.text(`
 .loginBox {
   position: fixed;
@@ -58,13 +75,60 @@ document.head.appendChild(t("style")({})([t.text(`
 
   bottom: 8px;
   right: 8px;
+  min-width: 200px;
 
   border-radius: 8px;
-  padding: 16px;
 
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 25%);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 25%);
 
   background-color: #fff;
+}
+
+.loginBox__header {
+  margin: 16px 16px 0;
+  padding-bottom: 8px;
+  border-bottom: solid 1px #eee;
+  color: #888;
+}
+
+.loginBox__header__close {
+  position: relative;
+  float: right;
+  width: 1em;
+  height: 1em;
+  padding: 0;
+  background: none;
+  border: none;
+  margin-left: 8px;
+}
+
+.loginBox__header__close:before {
+  position: absolute;
+  display: block;
+  content: "";
+  box-sizing: border-box;
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  background-color: #888;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.loginBox__header__close:after {
+  position: absolute;
+  display: block;
+  content: "";
+  box-sizing: border-box;
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  background-color: #888;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.loginBox__body {
+  text-align: center;
+  padding: 16px;
 }
 
 .loginBox__loginButton {
@@ -73,7 +137,7 @@ document.head.appendChild(t("style")({})([t.text(`
   overflow: hidden;
   border: none;
   border-radius: 4px;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 25%);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 25%);
   background-color: #0f6fc5;
   color: #fff;
 }
