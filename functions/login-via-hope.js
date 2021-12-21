@@ -1,8 +1,8 @@
 const fetch = require("node-fetch");
 
 const BASE_URL = "https://cathie.codes/";
-
-const VALIDATION_URL = `https://hope.c.fun.ac.jp/cas/login?service=${encodeURI(BASE_URL)}&ticket=`;
+const FUNCTION_URL = `${BASE_URL}/.netlify/functions/login-via-hope`;
+const VALIDATION_URL = `https://hope.c.fun.ac.jp/cas/login?service=${encodeURI(FUNCTION_URL)}&ticket=`;
 
 exports.handler = async (event, context) => {
   const ticket = event.queryStringParameters.ticket;
