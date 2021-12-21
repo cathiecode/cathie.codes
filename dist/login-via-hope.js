@@ -35,7 +35,7 @@ const FUNCTION_URL = `${BASE_URL}/.netlify/functions/login-via-hope`;
 const HOPE_LOGIN_URL = `https://hope.c.fun.ac.jp/cas/login?service=${encodeURI(FUNCTION_URL)}`;
 
 const loginButton = (text, onClick) => {
-  return t.button({ className: "loginBox__loginButton", onclick: onClick })([t.text(text), t.div({ className: "loginBox__loginButton__ripple" })([])])
+  return t.button({ className: "loginBox__loginButton", onclick: onClick })([t.text(text)])
 }
 
 const loginBox = () => {
@@ -72,20 +72,27 @@ document.head.appendChild(t("style")({})([t.text(`
 .loginBox {
   position: fixed;
   display: inline-block;
-
   bottom: 8px;
   right: 8px;
+  border: solid 1px #eee;
   min-width: 200px;
-
   border-radius: 8px;
-
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 25%);
-
   background-color: #fff;
+  animation: login-via-hope-popup 250ms 5s both;
+}
+
+@keyframes login-via-hope-popup {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .loginBox__header {
-  margin: 16px 16px 0;
+  padding: 16px;
+  
   padding-bottom: 8px;
   border-bottom: solid 1px #eee;
   color: #888;
@@ -137,12 +144,32 @@ document.head.appendChild(t("style")({})([t.text(`
   overflow: hidden;
   border: none;
   border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0%);
+  color: #333;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 25%);
-  background-color: #0f6fc5;
-  color: #fff;
 }
 
-.loginBox__loginButton .loginBox__loginButton__ripple {
+.loginBox__loginButton:before {
+  content: "";
+  position: absolute;
+  width: 300%;
+  height: 300%;
+  animation: button-color-cycle 1500ms linear 0ms infinite normal both;
+  animation-play-state: paused;
+  background: linear-gradient(to right, #fdf, #ddf, #fdf, #ddf);
+  background-repeat: repeat;
+  transform-origin: 50%, 50%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.loginBox__loginButton:hover:before {
+  animation-play-state: running;
+}
+
+.loginBox__loginButton:after {
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -152,11 +179,10 @@ document.head.appendChild(t("style")({})([t.text(`
   transform: translate(-50%, -50%) scale(0);
   background-color: #fff;
   opacity: 0%;
-
   transition: transform ease-out 0ms 300ms, opacity linear 300ms;
 }
 
-.loginBox__loginButton:active .loginBox__loginButton__ripple {
+.loginBox__loginButton:active:after {
   transform: translate(-50%, -50%) scale(1);
   transition: transform ease-out 150ms;
   opacity: 50%;
