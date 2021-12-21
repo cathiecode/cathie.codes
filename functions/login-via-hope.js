@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 
 const BASE_URL = "https://cathie.codes";
 const FUNCTION_URL = `${BASE_URL}/.netlify/functions/login-via-hope`;
-const VALIDATION_URL = `https://hope.c.fun.ac.jp/cas/login?service=${encodeURI(FUNCTION_URL)}&ticket=`;
+const VALIDATION_URL = `https://hope.c.fun.ac.jp/cas/validate?service=${encodeURI(FUNCTION_URL)}&ticket=`;
 
 exports.handler = async (event, context) => {
   console.log("Logging in via hope")
@@ -24,7 +24,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 302,
       headers: {
-        "Location": BASE_URL + "?authStatus=error&by=invalid_response"
+        "Location": BASE_URL + "?authStatus=error&by=invalid_response_status"
       }
     }
   }
@@ -36,12 +36,22 @@ exports.handler = async (event, context) => {
   console.log("response_parsed", JSON.stringify(validationResponseArray));
 
   if (validationResponseArray[0] !== "yes") {
-    return {
-      statusCode: 302,
-      headers: {
-        "Location": BASE_URL + "?authStatus=error&by=no_response"
+    if (validationResponseArray[0] === "no") {
+      return {
+        statusCode: 302,
+        headers: {
+          "Location": BASE_URL + "?authStatus=error&by=no_response"
+        }
+      }
+    } else {
+      return {
+        statusCode: 302,
+        headers: {
+          "Location": BASE_URL + "?authStatus=error&by=invalid_response"
+        }
       }
     }
+
   } else {
     return {
       statusCode: 302,
