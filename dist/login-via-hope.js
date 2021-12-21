@@ -52,7 +52,7 @@ const loginBox = () => {
       ]
     case "ok":
       return [
-        t.div({ className: "loginBox__body" })([t.text(`${Cookies.get("authUser")}としてログイン中`)])
+        t.div({ className: "loginBox__body" })([t.text(`${Cookies.get("authUser")}としてログイン中`), t.button({ className: "loginBox__header__close", onclick: () => { document.getElementById("login-via-hope-box").remove() } })([])])
       ]
   }
 }
