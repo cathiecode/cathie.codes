@@ -1,0 +1,23 @@
+.Header {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  height: 5em;
+  z-index: 1;
+
+  padding: 0 2em;
+}
+
+.tradeMark {
+  display: inline-block;
+  box-sizing: content-box;
+  font-weight: bold;
+
+  color: var(--black);
+
+  transition: color linear 100ms, background-color linear 180ms;
+
+  cursor: pointer;
+}

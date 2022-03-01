@@ -1,0 +1,13 @@
+@use "../../../styles/breakpoints.scss" as *;
+
+.Container {
+  @include breakpoint(sp) {
+    width: 100%;
+  }
+
+  @include breakpoint(pc) {
+    width: 100%;
+    margin: auto;
+    max-width: 60rem;
+  }
+}
