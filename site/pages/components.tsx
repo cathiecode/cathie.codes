@@ -8,6 +8,7 @@ import HeroHorizontalLine from "components/model/article/HeroHorizontalLine";
 import HeroText from "components/model/article/HeroText";
 import Image from "next/image";
 import Container from "components/ui/Container";
+import PageLoader from "components/model/global/PageLoader";
 
 const Components: NextPage = () => {
   return (
@@ -21,6 +22,9 @@ const Components: NextPage = () => {
         ))}
         <IconicOneTimeLineAnimation />
         <IconicInfiniteLineAnimation />
+        <div>
+          <PageLoader style={{ width: "100%", height: "8px" }} />
+        </div>
       </Container>
       <div>
         <Heading level={2}>article</Heading>

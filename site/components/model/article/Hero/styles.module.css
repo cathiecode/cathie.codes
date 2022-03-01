@@ -42,7 +42,7 @@
   pointer-events: none;
   touch-action: none;
 
-  transform: scale(110%); /* NOTE: edge of blur */
+  transform: scale(120%); /* NOTE: edge of blur */
   transition: transform cubic-bezier(0, 1, 0, 1) 2000ms;
 }
 

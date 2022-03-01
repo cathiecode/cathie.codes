@@ -1,0 +1,4 @@
+.PageLoader {
+  display: block;
+  transition: stroke-dashoffset linear 180ms, opacity linear 250ms;
+}

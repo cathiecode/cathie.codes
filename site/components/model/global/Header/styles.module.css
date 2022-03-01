@@ -4,20 +4,49 @@
   width: 100%;
   justify-content: flex-start;
   align-items: center;
-  height: 5em;
+  height: 6em;
   z-index: 1;
 
-  padding: 0 2em;
+  padding: 0 1em;
+}
+
+.tradeMarkWrapper {
+  display: inline-block;
+  position: relative;
 }
 
 .tradeMark {
-  display: inline-block;
-  box-sizing: content-box;
-  font-weight: bold;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  width: 4rem;
+  height: 4rem;
 
-  color: var(--black);
+  border-radius: 100%;
+}
 
-  transition: color linear 100ms, background-color linear 180ms;
+.tradeMarkWrapper:before {
+  position: absolute;
 
-  cursor: pointer;
+  display: block;
+  content: "";
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 100%;
+
+  border: dashed 2px var(--black);
+
+  opacity: 0;
+
+  transition: transform cubic-bezier(0, 1, 0, 1) 2000ms, opacity linear 250ms;
+}
+
+.tradeMarkWrapper:hover:before {
+  opacity: 1;
+  transform: scale(1.2) rotate(45deg);
+}
+
+.tradeMarkWrapper:active {
 }
