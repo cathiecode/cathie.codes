@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import IconicInfiniteLineAnimation from "../../../ui/IconicInfiniteLineAnimation";
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 
 type HeroProps = {
   children?: ReactNode;

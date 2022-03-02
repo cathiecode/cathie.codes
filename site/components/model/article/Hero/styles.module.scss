@@ -1,3 +1,5 @@
+@use "../../../../styles/breakpoints.scss" as *;
+
 .Hero {
   position: relative;
   background-color: #fff;
@@ -12,8 +14,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 9rem 0 6rem;
   background-color: rgba(255, 255, 255, 0.8);
+
+  @include breakpoint(sp) {
+    padding: 8rem 0 6rem;
+  }
+  @include breakpoint(pc) {
+    padding: 6rem 0;
+  }
+}
+
+.wrapper > * {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .animationLeftTop {

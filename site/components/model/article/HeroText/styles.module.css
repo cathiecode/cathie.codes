@@ -1,4 +1,5 @@
 .HeroText {
   color: var(--black);
   max-width: min(90%, calc(40rem - 0.5rem)); /* hack for align text */
+  margin: 1rem;
 }

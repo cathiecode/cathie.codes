@@ -13,7 +13,7 @@ export default function PageLoader({ className, style }: PageLoaderProps) {
 
   const [fakeProgress, setFakeProgress] = useState(0);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [loaderKey, setLoaderKey] = useState(0);
 
