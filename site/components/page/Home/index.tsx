@@ -14,30 +14,26 @@ type HomeProps = {
 
 export default function Home({ contents }: HomeProps) {
   return (
-    <Page>
-      <div className={styles.Home}>
-        <div className={styles.hero}>
-          <div className={styles.heroBack}></div>
-          <div className={styles.heroFront}>
-            <div className={styles.heroMainContents}>
-              <IconicOneTimeLineAnimation
-                duration={600}
-                className={styles.heroIconicAnimationLeft}
-              />
-              <h1 className={styles.heroContentsAnimationTarget}>
-                @cathiecode
-              </h1>
-              <IconicOneTimeLineAnimation
-                duration={600}
-                className={styles.heroIconicAnimationRight}
-              />
-            </div>
+    <div className={styles.Home}>
+      <div className={styles.hero}>
+        <div className={styles.heroBack}></div>
+        <div className={styles.heroFront}>
+          <div className={styles.heroMainContents}>
+            <IconicOneTimeLineAnimation
+              duration={600}
+              className={styles.heroIconicAnimationLeft}
+            />
+            <h1 className={styles.heroContentsAnimationTarget}>@cathiecode</h1>
+            <IconicOneTimeLineAnimation
+              duration={600}
+              className={styles.heroIconicAnimationRight}
+            />
           </div>
         </div>
-        <Container>
-          <ArticleBody body={contents.body} />
-        </Container>
       </div>
-    </Page>
+      <Container>
+        <ArticleBody body={contents.body} />
+      </Container>
+    </div>
   );
 }

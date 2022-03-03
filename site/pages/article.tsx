@@ -1,15 +1,13 @@
-import { GlobalContents } from "api/fetchGlobalContents";
+import fetchGlobalContents, { GlobalContents } from "api/fetchGlobalContents";
 import ArticleBody from "components/model/article/ArticleBody";
 import Hero from "components/model/article/Hero";
 import HeroHorizontalLine from "components/model/article/HeroHorizontalLine";
 import HeroText from "components/model/article/HeroText";
 import HeroTitle from "components/model/article/HeroTitle";
-import Header from "components/model/global/Header";
 import Page from "components/model/global/Page";
 import Container from "components/ui/Container";
-import RenderHast from "components/ui/RenderHast";
-
-import { fromParse5, Node } from "hast-util-from-parse5/lib";
+import { fromMarkdown } from "mdast-util-from-markdown";
+import { HastNode, toHast } from "mdast-util-to-hast/lib";
 
 import {
   GetStaticProps,
@@ -27,17 +25,21 @@ type ArticleData = {
   coverImage: string /* may be data url */;
   leadText: string;
   tags: string[];
-  body: Node;
+  body: HastNode;
 };
 
 type ArticleProps = {
   article: ArticleData;
+  globalContents: GlobalContents;
 };
 
-const Article: NextPage<ArticleProps> = ({ article }: ArticleProps) => {
+const Article: NextPage<ArticleProps> = ({
+  article,
+  globalContents,
+}: ArticleProps) => {
   console.log(article.body);
   return (
-    <Page>
+    <Page globalContents={globalContents}>
       <article>
         <Hero
           background={({ className }) => (
@@ -72,14 +74,12 @@ export const getStaticProps: GetStaticProps = async () => {
     leadText:
       "勉強ばかりして遊ばないと子供はばかになる．仕事ばかりしている人間はおもしろみのない人になる．勉強ばかりして遊ばないと子供はばかになる．仕事ばかりしている人間はおもしろみのない人になる．勉強ばかりして遊ばないと子供はばかになる．仕事ばかりしている人間はおもしろみのない人になる．勉強ばかりして遊ばないと子供はばかになる．仕事ばかりしている人間はおもしろみのない人になる．",
     tags: ["使用技術タグ", "使用技術タグ", "使用技術タグ"],
-    body: fromParse5(
-      parseFragment(
-        `<h1>勉強ばかりして遊ばないと子供はばかになる．</h1><img src="/vercel.svg" /><p>仕事ばかりしている人間はおもしろみのない人になる．勉強ばかりして遊ばないと子供はばかになる．仕事ばかりしている人間はおもしろみのない人になる．勉強ばかりして遊ばないと子供はばかになる．仕事ばかりしている人間はおもしろみのない人になる．勉強ばかりして遊ばないと子供はばかになる．仕事ばかりしている人間はおもしろみのない人になる．</p>`
-      )
-    ),
+    body: toHast(fromMarkdown("")) ?? { type: "root", children: [] },
   };
 
-  return { props: { article } };
+  const globalContents = await fetchGlobalContents();
+
+  return { props: { article, globalContents } };
 };
 
 export default Article;

@@ -1,15 +1,14 @@
 import Heading from "components/ui/Heading";
 import RenderHast from "components/ui/RenderHast";
-import { Node } from "hast-util-from-parse5/lib";
-import { isLocalURL } from "next/dist/shared/lib/router/router";
+import { HastNode } from "mdast-util-to-hast/lib";
 import Link from "next/link";
-import { createElement, ReactNode } from "react";
+import { createElement } from "react";
 import ArticleImage from "../ArticleImage";
 
 import styles from "./styles.module.scss";
 
 type ArticleBodyProps = {
-  body: Node;
+  body: HastNode;
 };
 
 export default function ArticleBody({ body }: ArticleBodyProps) {
@@ -28,7 +27,7 @@ export default function ArticleBody({ body }: ArticleBodyProps) {
               src={props["src"] as string}
               alt={props["alt"] as string}
               width={Number(props["width"])}
-              height={Number(props["width"])}
+              height={Number(props["height"])}
             />
           ),
           a: (children, { href, ...props }) =>

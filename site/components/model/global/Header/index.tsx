@@ -66,9 +66,9 @@ export default function Header() {
             )}
             ref={navRef}
           >
-            <div className={styles.logo}>
-              <Link href="/">cathie.codes</Link>
-            </div>
+            <Link href="/">
+              <a className={styles.logo}>cathie.codes</a>
+            </Link>
             <div className={styles.navItem}>トップ</div>
             <div className={styles.navItem}>ポートフォリオ</div>
             <button className={styles.lock} onClick={onLockClicked}>

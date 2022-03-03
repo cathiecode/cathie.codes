@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpRightAndDownLeftFromCenter } from "@fortawesome/free-solid-svg-icons";
-import { ReactNode, CSSProperties, useRef, useCallback, useState } from "react";
+import { CSSProperties, useRef, useCallback, useState } from "react";
+import { default as NextImage } from "next/image";
 import { useInViewport } from "react-in-viewport";
 import IconicOneTimeLineAnimation from "../IconicOneTimeLineAnimation";
 import Modal from "../Modal";
@@ -41,7 +42,9 @@ export default function Image({
       <img alt={alt} src={src} />
     );
   } else {
-    imageElement = <Image alt={alt} src={src} width={width} height={height} />;
+    imageElement = (
+      <NextImage alt={alt} src={src} width={width} height={height} />
+    );
   }
 
   const alreadyDisplayed = enterCount > 0;

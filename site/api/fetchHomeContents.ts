@@ -1,16 +1,10 @@
-import { fromParse5, Node } from "hast-util-from-parse5/lib";
-import { parseFragment } from "parse5";
-import sanitize from "sanitize-html";
-import fetchMicroCms from "./fetchMicroCms";
+import { HastNode } from "mdast-util-to-hast/lib";
+import fetchPageContents from "./fetchPage";
 
 export type HomeContents = {
-  body: Node;
+  body: HastNode;
 };
 
 export default async function fetchHomeContents(): Promise<HomeContents> {
-  const response = await fetchMicroCms("index");
-
-  return {
-    body: fromParse5(parseFragment(sanitize(response["body"]))),
-  };
+  return await fetchPageContents("index");
 }

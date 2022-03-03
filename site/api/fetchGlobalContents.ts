@@ -1,11 +1,11 @@
 export type GlobalContents = {
-  lastModified: Date;
+  lastModified: string;
 };
 
 const lastModified = new Date();
 
 export default async function fetchGlobalContents(): Promise<GlobalContents> {
   return {
-    lastModified: lastModified,
+    lastModified: lastModified.toISOString(),
   };
 }

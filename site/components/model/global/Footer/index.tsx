@@ -1,12 +1,12 @@
-import { GlobalContents } from "api/fetchGlobalContents";
+import GlobalContentsContext from "contexts/GlobalContents";
+import { lightFormat, parseISO } from "date-fns";
 import Link from "next/link";
-import styles from "./styles.module.css";
+import { useContext } from "react";
+import styles from "./styles.module.scss";
 
-type FooterProps = {
-  contents: GlobalContents;
-};
+export default function Footer() {
+  const contents = useContext(GlobalContentsContext);
 
-export default function Footer({ contents }: FooterProps) {
   return (
     <div className={styles.Footer}>
       <div className={styles.logo}>cathie.codes</div>
@@ -23,7 +23,12 @@ export default function Footer({ contents }: FooterProps) {
               このサイトのソースコード
             </Link>
           </li>
-          <li className={styles.navItem}>最終更新: {contents.lastModified}</li>
+          {contents && (
+            <li className={styles.navItem}>
+              最終更新:{" "}
+              {lightFormat(parseISO(contents.lastModified), "yyyy/MM/dd HH:mm")}
+            </li>
+          )}
         </ul>
       </nav>
     </div>
