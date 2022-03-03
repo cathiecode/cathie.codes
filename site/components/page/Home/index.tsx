@@ -15,7 +15,7 @@ export default function Home({}: HomeProps) {
               duration={600}
               className={styles.heroIconicAnimationLeft}
             />
-            <h1 className={styles.heroContentsAnimationTarget}>cathie.codes</h1>
+            <h1 className={styles.heroContentsAnimationTarget}>@cathiecode</h1>
             <IconicOneTimeLineAnimation
               duration={600}
               className={styles.heroIconicAnimationRight}
