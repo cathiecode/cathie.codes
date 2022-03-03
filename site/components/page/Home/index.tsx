@@ -1,3 +1,5 @@
+import CatherineTalkingBubble from "components/ui/CatherineTalkingBubble";
+import Container from "components/ui/Container";
 import Heading from "components/ui/Heading";
 import IconicOneTimeLineAnimation from "components/ui/IconicOneTimeLineAnimation";
 import styles from "./styles.module.css";
@@ -23,9 +25,12 @@ export default function Home({}: HomeProps) {
           </div>
         </div>
       </div>
-      <div>
-        <Heading level={2}>ヒーロー</Heading>
-      </div>
+      <Container>
+        <Heading level={1}>
+          <CatherineTalkingBubble />
+          Hi, there! This is Catherine Code talking!
+        </Heading>
+      </Container>
     </div>
   );
 }

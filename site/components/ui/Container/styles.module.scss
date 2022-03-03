@@ -1,6 +1,8 @@
 @use "../../../styles/breakpoints.scss" as *;
 
 .Container {
+  padding: 0 1rem;
+
   @include breakpoint(sp) {
     width: 100%;
   }

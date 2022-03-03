@@ -21,6 +21,6 @@ export default function Heading({
       style: style,
       className: `${className ?? ""} ${styles.Heading}`,
     },
-    children
+    <span className={styles.marker}>{children}</span>
   );
 }

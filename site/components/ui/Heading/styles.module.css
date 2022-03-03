@@ -2,8 +2,9 @@
   font-weight: bold;
   line-height: 1em;
   color: var(--black);
-  background: linear-gradient(transparent 80%, var(--yellow) 80%);
   margin-top: var(--gap-paragraph);
+  line-height: 1.5em;
+  border-bottom: solid 0.2em var(--yellow);
 }
 
 h1.Heading {

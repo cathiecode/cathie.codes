@@ -1,0 +1,22 @@
+.CatherineTalkingBubble {
+  display: inline;
+  position: relative;
+}
+
+.bubble {
+  position: relative;
+  bottom: calc(0.5rem);
+  transform-origin: 98% 84%;
+
+  animation: bubbleAnimation steps(1) 2000ms infinite;
+}
+
+@keyframes bubbleAnimation {
+  from {
+    transform: rotate(-2deg);
+  }
+
+  50% {
+    transform: rotate(2deg);
+  }
+}
