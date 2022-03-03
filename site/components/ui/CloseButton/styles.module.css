@@ -1,0 +1,57 @@
+.CloseButton {
+  position: relative;
+  border-radius: 100%;
+  width: 4rem;
+  height: 4rem;
+
+  background-color: var(--black);
+
+  box-shadow: var(--shadow);
+}
+
+.CloseButton:before,
+.CloseButton:after {
+  position: absolute;
+  display: block;
+  content: "";
+  height: 0.5em;
+  background-color: var(--lightgray);
+  transform-origin: center;
+
+  will-change: width, top, left, background-color;
+  transition: width ease-in-out 180ms, top linear 180ms, left ease-in-out 180ms,
+    background-color ease-in-out 180ms;
+}
+
+.CloseButton:before {
+  content: "";
+  width: 3em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.CloseButton:after {
+  content: "";
+  width: 3em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.CloseButton:hover:before,
+.CloseButton:hover:after {
+  background-color: var(--white);
+}
+
+.CloseButton:hover:before {
+  width: 1.5em;
+  top: 62.5%;
+  left: 32%;
+}
+
+.CloseButton:hover:after {
+  width: 2.5em;
+  top: 55%;
+  left: 60%;
+}

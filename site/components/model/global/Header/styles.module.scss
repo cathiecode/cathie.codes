@@ -1,0 +1,215 @@
+@use "../../../../styles/breakpoints.scss" as *;
+.Header {
+  position: fixed;
+  display: flex;
+  z-index: 1;
+  top: 1rem;
+  left: 1rem;
+}
+
+.tradeMarkAndLogoWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.tradeMarkWrapper {
+  top: 1rem;
+  left: 1rem;
+
+  display: inline-block;
+  position: relative;
+}
+
+.tradeMark {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  width: 4rem;
+  height: 4rem;
+
+  border-radius: 100%;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 25%);
+}
+
+.logo {
+  display: flex;
+  height: 4rem;
+  margin-left: 5.5rem;
+  align-items: center;
+  color: var(--gray);
+
+  font-weight: bold;
+  font-size: 1.25rem;
+
+  will-change: color;
+  transition: color ease-out 180ms;
+
+  @include breakpoint(sp) {
+    margin-bottom: 1rem;
+  }
+}
+
+.nav {
+  position: fixed;
+  display: flex;
+  color: var(--black);
+  font-weight: bold;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--white);
+  box-shadow: var(--shadow);
+
+  transition: opacity ease-out 180ms;
+
+  @include breakpoint(sp) {
+    flex-direction: column;
+  }
+
+  @include breakpoint(pc) {
+    justify-content: flex-start;
+    align-items: center;
+    padding-right: 2rem;
+  }
+}
+
+.navItem {
+  position: relative;
+
+  will-change: background-color;
+  transition: background-color 180ms 250ms ease-out;
+
+  @include breakpoint(sp) {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+
+  @include breakpoint(pc) {
+    margin-left: 1rem;
+  }
+}
+
+.lock {
+  padding: 1rem;
+  border-radius: 0.5rem;
+
+  will-change: background-color;
+  transition: background-color 180ms 250ms ease-out;
+
+  @include breakpoint(sp) {
+    margin-top: 1rem;
+  }
+
+  @include breakpoint(pc) {
+    margin-left: 1rem;
+  }
+}
+
+// interactions
+
+.nav--entering {
+  animation: navEnter linear 180ms both;
+}
+
+.nav--entered {
+  opacity: 1;
+}
+
+.nav--exiting {
+  animation: navExit linear 180ms both;
+}
+
+.nav--exited {
+  display: none;
+}
+
+@keyframes navEnter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes navExit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.lock:active {
+  background-color: var(--lightgray);
+  transition: background-color 180ms ease-out;
+}
+
+.tradeMarkWrapper:before {
+  position: absolute;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  border-radius: 100%;
+  border: dashed 2px var(--black);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+  transition: transform cubic-bezier(0, 1, 0, 1) 1000ms, opacity linear 250ms;
+  pointer-events: none;
+}
+
+.tradeMarkWrapper:hover:before {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.2) rotate(45deg);
+}
+
+.active .tradeMarkWrapper:before {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+}
+
+.logo:hover {
+  color: var(--black);
+}
+
+@include breakpoint(sp) {
+  .navItem:active {
+    background-color: var(--lightgray);
+    transition: background-color 180ms ease-out;
+  }
+}
+
+@include breakpoint(pc) {
+  .navItem:before,
+  .navItem:after {
+    position: absolute;
+    display: block;
+    content: "";
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: max(0.1rem, 1px);
+    background: var(--lightgray);
+  }
+
+  .navItem:after {
+    background-color: var(--black);
+
+    will-change: transform;
+    transition: transform cubic-bezier(0, 1, 0, 1) 250ms;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .navItem:hover:after {
+    width: 100%;
+    transform: scaleX(1);
+  }
+}

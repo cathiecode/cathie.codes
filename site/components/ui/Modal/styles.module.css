@@ -4,7 +4,22 @@
   left: 0;
   right: 0;
   bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1;
+
+  overflow: scroll;
+
+  overscroll-behavior: contain;
+
+  will-change: opacity;
+}
+
+.closeButton {
+  position: absolute !important;
+  top: 2em;
+  right: 2em;
 }
 
 .touchGuard {
@@ -15,7 +30,8 @@
 
   background-color: var(--white);
 
-  opacity: 0.75;
+  opacity: 0.9;
+  z-index: -1;
 }
 
 .Modal--entering {

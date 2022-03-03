@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpRightAndDownLeftFromCenter } from "@fortawesome/free-solid-svg-icons";
 import { ReactNode, CSSProperties, useRef, useCallback, useState } from "react";
 import { useInViewport } from "react-in-viewport";
 import IconicOneTimeLineAnimation from "../IconicOneTimeLineAnimation";
@@ -23,7 +25,7 @@ export default function Image({
   height,
 }: ImageProps) {
   const wrapperRef = useRef<HTMLImageElement>(null);
-  const { enterCount } = useInViewport(wrapperRef, undefined, {
+  const { inViewport, enterCount } = useInViewport(wrapperRef, undefined, {
     disconnectOnLeave: true,
   });
 
@@ -59,16 +61,22 @@ export default function Image({
           <IconicOneTimeLineAnimation className={styles.animationRight} />
         </>
       ) : null}
-      <div className={styles.wrapper}>{imageElement}</div>
-      <div>
-        <button onClick={useCallback(() => setIsFullscreen(true), [])}>
-          拡大
-        </button>
-        <Modal
-          onClose={useCallback(() => setIsFullscreen(false), [])}
-          open={isFullscreen}
-        ></Modal>
+      <div
+        className={styles.wrapper}
+        onClick={useCallback(() => setIsFullscreen(true), [])}
+      >
+        {imageElement}
+        <FontAwesomeIcon
+          icon={faUpRightAndDownLeftFromCenter}
+          className={styles.zoom}
+        />
       </div>
+      <Modal
+        onClose={useCallback(() => setIsFullscreen(false), [])}
+        open={isFullscreen}
+      >
+        {imageElement}
+      </Modal>
     </div>
   );
 }

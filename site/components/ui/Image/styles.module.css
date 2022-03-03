@@ -17,7 +17,7 @@
   opacity: 0;
   transform: translate(-2rem, 2rem);
 
-  transition: transform ease-in-out 300ms, opacity linear 300ms;
+  transition: transform cubic-bezier(0, 1, 0, 1) 300ms, opacity linear 300ms;
 }
 
 .inViewport.Image {
@@ -27,6 +27,24 @@
 .inViewport .wrapper {
   opacity: 1;
   transform: none;
+
+  cursor: pointer;
+}
+
+.zoom {
+  position: absolute;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: var(--black);
+  background-color: var(--lightgray);
+
+  will-change: opacity;
+  opacity: 0;
+  transition: opacity linear 180ms;
 }
 
 .animationLeft {
@@ -34,7 +52,7 @@
   left: 0;
   top: 0;
 
-  height: 3rem;
+  height: 2rem;
 }
 
 .animationRight {
@@ -42,5 +60,9 @@
   right: 0;
   bottom: 0;
 
-  height: 3rem;
+  height: 2rem;
+}
+
+.Image:hover .zoom {
+  opacity: 0.9;
 }

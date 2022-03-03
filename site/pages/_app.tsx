@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import PageLoader from "components/model/global/PageLoader";
+import Header from "components/model/global/Header";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -14,6 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           top: 0,
         }}
       />
+      <Header />
       <Component {...pageProps} />
     </>
   );

@@ -1,11 +1,8 @@
 import { ReactNode, CSSProperties, useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Transition } from "react-transition-group";
-import {
-  ENTERED,
-  ENTERING,
-  EXITING,
-} from "react-transition-group/Transition";
+import { ENTERED, ENTERING, EXITING } from "react-transition-group/Transition";
+import CloseButton from "../CloseButton";
 
 import styles from "./styles.module.css";
 
@@ -48,14 +45,8 @@ export default function Modal({
                 ref={wrapperRef}
               >
                 <div className={styles.touchGuard} onClick={onClose}></div>
+                <CloseButton className={styles.closeButton} onClick={onClose} />
                 {children}
-                <style>
-                  {`
-                    body {
-                      overflow: hidden;
-                    }
-                  `}
-                </style>
               </div>,
               window.document.body
             );

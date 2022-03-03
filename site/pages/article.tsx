@@ -36,7 +36,6 @@ const Article: NextPage<ArticleProps> = ({ article }: ArticleProps) => {
   console.log(article.body);
   return (
     <article>
-      <Header />
       <Hero
         background={({ className }) => (
           <Image
@@ -71,7 +70,7 @@ export const getStaticProps: GetStaticProps = async ({}) => {
     tags: ["使用技術タグ", "使用技術タグ", "使用技術タグ"],
     body: fromParse5(
       parseFragment(
-        `<h2>勉強ばかりして遊ばないと子供はばかになる．</h2><img src="/vercel.svg" /><p>仕事ばかりしている人間はおもしろみのない人になる．勉強ばかりして遊ばないと子供はばかになる．仕事ばかりしている人間はおもしろみのない人になる．勉強ばかりして遊ばないと子供はばかになる．仕事ばかりしている人間はおもしろみのない人になる．勉強ばかりして遊ばないと子供はばかになる．仕事ばかりしている人間はおもしろみのない人になる．</p>`
+        `<h1>勉強ばかりして遊ばないと子供はばかになる．</h1><img src="/vercel.svg" /><p>仕事ばかりしている人間はおもしろみのない人になる．勉強ばかりして遊ばないと子供はばかになる．仕事ばかりしている人間はおもしろみのない人になる．勉強ばかりして遊ばないと子供はばかになる．仕事ばかりしている人間はおもしろみのない人になる．勉強ばかりして遊ばないと子供はばかになる．仕事ばかりしている人間はおもしろみのない人になる．</p>`
       )
     ),
   };
