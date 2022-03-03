@@ -1,0 +1,7 @@
+.ArticleImage {
+  display: block;
+  margin: 1rem;
+  padding: 1rem !important;
+  background-color: var(--white);
+  float: inline-end;
+}

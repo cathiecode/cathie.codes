@@ -1,0 +1,46 @@
+.Image {
+  position: relative;
+  display: inline-block;
+  border-radius: 0.5rem;
+  border: solid 0.1rem transparent;
+
+  padding: 2rem;
+
+  transition: border-color;
+}
+
+.wrapper {
+  position: relative;
+  display: inline-block;
+  border-radius: 0.5rem;
+
+  opacity: 0;
+  transform: translate(-2rem, 2rem);
+
+  transition: transform ease-in-out 300ms, opacity linear 300ms;
+}
+
+.inViewport.Image {
+  border-color: var(--lightgray);
+}
+
+.inViewport .wrapper {
+  opacity: 1;
+  transform: none;
+}
+
+.animationLeft {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  height: 3rem;
+}
+
+.animationRight {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  height: 3rem;
+}

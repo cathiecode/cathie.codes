@@ -1,0 +1,55 @@
+.Modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.touchGuard {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--white);
+
+  opacity: 0.75;
+}
+
+.Modal--entering {
+  animation: enterAnimation linear 180ms both;
+}
+
+.Modal--entered {
+  opacity: 1;
+}
+
+.Modal--exiting {
+  animation: exitAnimation linear 180ms both;
+}
+
+.Modal--exited {
+  opacity: 0;
+}
+
+@keyframes enterAnimation {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes exitAnimation {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
