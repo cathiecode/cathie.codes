@@ -1,9 +1,11 @@
+import { GlobalContents } from "api/fetchGlobalContents";
 import ArticleBody from "components/model/article/ArticleBody";
 import Hero from "components/model/article/Hero";
 import HeroHorizontalLine from "components/model/article/HeroHorizontalLine";
 import HeroText from "components/model/article/HeroText";
 import HeroTitle from "components/model/article/HeroTitle";
 import Header from "components/model/global/Header";
+import Page from "components/model/global/Page";
 import Container from "components/ui/Container";
 import RenderHast from "components/ui/RenderHast";
 
@@ -35,32 +37,34 @@ type ArticleProps = {
 const Article: NextPage<ArticleProps> = ({ article }: ArticleProps) => {
   console.log(article.body);
   return (
-    <article>
-      <Hero
-        background={({ className }) => (
-          <Image
-            src="https://cathie.codes/assets/portfolio/libro_ilustrado/title.png"
-            layout="fill"
-            objectFit="cover"
-            alt=""
-            className={className}
-          />
-        )}
-      >
-        <HeroTitle>リブロ・イラストラド</HeroTitle>
-        <HeroText>アクション×ブロック崩し×ストーリー</HeroText>
-        <HeroHorizontalLine />
-        <HeroText>{article.leadText}</HeroText>
-        <HeroText>{article.tags.map((tag) => `#${tag}`)}</HeroText>
-      </Hero>
-      <Container>
-        <ArticleBody body={article.body} />
-      </Container>
-    </article>
+    <Page>
+      <article>
+        <Hero
+          background={({ className }) => (
+            <Image
+              src="https://cathie.codes/assets/portfolio/libro_ilustrado/title.png"
+              layout="fill"
+              objectFit="cover"
+              alt=""
+              className={className}
+            />
+          )}
+        >
+          <HeroTitle>リブロ・イラストラド</HeroTitle>
+          <HeroText>アクション×ブロック崩し×ストーリー</HeroText>
+          <HeroHorizontalLine />
+          <HeroText>{article.leadText}</HeroText>
+          <HeroText>{article.tags.map((tag) => `#${tag}`)}</HeroText>
+        </Hero>
+        <Container>
+          <ArticleBody body={article.body} />
+        </Container>
+      </article>
+    </Page>
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({}) => {
+export const getStaticProps: GetStaticProps = async () => {
   const article: ArticleData = {
     title: "リブロ・イラストラド",
     coverImage:
@@ -77,4 +81,5 @@ export const getStaticProps: GetStaticProps = async ({}) => {
 
   return { props: { article } };
 };
+
 export default Article;

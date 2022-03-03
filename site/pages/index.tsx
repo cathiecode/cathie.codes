@@ -1,11 +1,20 @@
+import fetchGlobalContents, { GlobalContents } from "api/fetchGlobalContents";
+import fetchHomeContents, { HomeContents } from "api/fetchHomeContents";
 import Home from "components/page/Home";
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 
-import Head from "next/head";
-import Image from "next/image";
+type IndexProps = {
+  contents: HomeContents;
+};
 
-const Index: NextPage = () => {
-  return <Home />;
+const Index: NextPage<IndexProps> = ({ contents }: IndexProps) => {
+  return <Home contents={contents} />;
+};
+
+export const getStaticProps: GetStaticProps = async ({}) => {
+  const contents = await fetchHomeContents();
+
+  return { props: { contents: contents } };
 };
 
 export default Index;

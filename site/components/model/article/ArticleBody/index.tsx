@@ -1,6 +1,8 @@
 import Heading from "components/ui/Heading";
 import RenderHast from "components/ui/RenderHast";
 import { Node } from "hast-util-from-parse5/lib";
+import { isLocalURL } from "next/dist/shared/lib/router/router";
+import Link from "next/link";
 import { createElement, ReactNode } from "react";
 import ArticleImage from "../ArticleImage";
 
@@ -29,6 +31,16 @@ export default function ArticleBody({ body }: ArticleBodyProps) {
               height={Number(props["width"])}
             />
           ),
+          a: (children, { href, ...props }) =>
+            typeof href === "string" && !href.startsWith("http") ? (
+              <Link href={href}>
+                <a {...props}>{children}</a>
+              </Link>
+            ) : (
+              <a href={href as string} {...props}>
+                {children}
+              </a>
+            ),
         }}
         fallbackRenderer={(children, properties, element) => {
           console.error(`Fallbacking element <${element.tagName}>`);
