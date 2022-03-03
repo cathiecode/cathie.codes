@@ -14,7 +14,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.75);
+
+  background-image: url("../../../../assets/bg-pattern.svg");
+  background-size: 32px;
 
   @include breakpoint(sp) {
     padding: 8rem 0 6rem;

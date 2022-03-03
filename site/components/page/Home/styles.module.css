@@ -1,3 +1,100 @@
 .Home {
-  
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+
+  overflow: hidden;
+}
+
+.heroBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: 200% 200%;
+
+  animation: heroBackAnimation linear 100ms both;
+}
+
+.heroFront {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.heroMainContents {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /* for test */
+  font-size: min(8rem, 14vw);
+  font-weight: bold;
+  line-height: min(8rem, 14vw);
+}
+
+.heroContentsAnimationTarget {
+  animation: heroContentsAnimation ease-out 1500ms both;
+  background-image: url("../../../assets/wave-background.svg");
+  background-clip: text;
+  background-size: cover;
+}
+
+.heroIconicAnimationLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 8rem;
+  transform: translate(-50%, -50%);
+}
+
+.heroIconicAnimationRight {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 8rem;
+  transform: translate(50%, 50%);
+}
+
+@keyframes heroContentsAnimation {
+  0% {
+    color: var(--black);
+    opacity: 0;
+    transform: translate(-6rem, 6rem);
+  }
+
+  20% {
+    opacity: 1;
+    transform: none;
+  }
+
+  80% {
+    color: var(--black);
+  }
+
+  100% {
+    color: transparent;
+  }
+}
+
+@keyframes heroBackAnimation {
+  0% {
+    background-position: 0 0;
+  }
+
+  33% {
+    background-position: 50% 0;
+  }
+
+  66% {
+    background-position: 50% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
 }

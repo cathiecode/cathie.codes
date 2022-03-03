@@ -7,13 +7,13 @@ import animation from "./animation.svg";
 type IconicOneTimeLineAnimationProps = {
   className?: string;
   style?: CSSProperties;
-  children?: ReactNode;
+  duration?: number;
 };
 
 export default function IconicOneTimeLineAnimation({
   className,
   style,
-  children,
+  duration = 400,
 }: IconicOneTimeLineAnimationProps) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
@@ -33,7 +33,7 @@ export default function IconicOneTimeLineAnimation({
       <style>
         {`
           .iconicOneTimeLineAnimation>path {
-            animation: oneTimeLineAnimation 400ms ease-in-out 1 both;
+            animation: oneTimeLineAnimation ${duration}ms ease-in-out 1 both;
             stroke-dasharray: 0, 100, 100;
             will-change: stroke-dashoffset;
           }
