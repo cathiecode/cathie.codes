@@ -43,7 +43,7 @@ export default function ArticleBody({ body }: ArticleBodyProps) {
         }}
         fallbackRenderer={(children, properties, element) => {
           console.error(`Fallbacking element <${element.tagName}>`);
-          return createElement(element.tagName, element.properties, children);
+          return createElement(element.tagName, properties, children);
         }}
         node={body}
       />

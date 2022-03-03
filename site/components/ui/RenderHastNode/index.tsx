@@ -1,5 +1,5 @@
-import { Properties } from "hast";
-import { Element, Node } from "hast-util-from-parse5/lib";
+import { Element, Properties } from "hast";
+import { HastNode } from "mdast-util-to-hast/lib";
 import { ReactNode, CSSProperties, HTMLAttributes, ReactElement } from "react";
 
 export type Renderer = (
@@ -14,7 +14,7 @@ type RenderHastNodeProps = {
   renderers: {
     [tagName: string]: Renderer;
   };
-  node: Node;
+  node: HastNode;
   fallbackRenderer?: Renderer;
 };
 
@@ -32,8 +32,14 @@ export default function RenderHastNode(props: RenderHastNodeProps) {
       </>
     );
   }
+
   if (node.type === "comment" || node.type === "doctype") {
     return null;
+  }
+
+
+  if (node.type === "raw") {
+    return <>{node.value}</>
   }
 
   const renderer = renderers[node.tagName] ?? fallbackRenderer;
