@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import { CSSProperties, useRef } from "react";
 
-import Image from "components/ui/Image";
+import DecoratedImage from "components/ui/DecoratedImage";
 
 type ArticleImageProps = {
   src: string;
@@ -18,6 +18,6 @@ export default function ArticleImage({
 }: ArticleImageProps) {
   return (
     // eslint-disable-next-line jsx-a11y/alt-text
-    <Image {...props} className={`${className ?? ""} ${styles.ArticleImage}`} />
+    <DecoratedImage {...props} className={`${className ?? ""} ${styles.ArticleImage}`} />
   );
 }
