@@ -3,7 +3,7 @@ import { default as NextImage, ImageLoaderProps } from "next/image";
 
 import styles from "./styles.module.css";
 
-type ImageProps = {
+export type ImageProps = {
   alt: string,
   src: string,
   width: number,

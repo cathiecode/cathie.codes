@@ -1,30 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpRightAndDownLeftFromCenter } from "@fortawesome/free-solid-svg-icons";
-import { CSSProperties, useRef, useCallback, useState } from "react";
-import { default as NextImage } from "next/image";
+import { useRef, useCallback, useState, CSSProperties } from "react";
+import Image, { ImageProps } from "../Image";
 import { useInViewport } from "react-in-viewport";
 import IconicOneTimeLineAnimation from "../IconicOneTimeLineAnimation";
 import Modal from "../Modal";
 
 import styles from "./styles.module.css";
 
-type ImageProps = {
-  src: string;
-  width: number;
-  height: number;
-  alt: string;
-  style?: CSSProperties;
-  className?: string;
-};
+type DecoratedImageProps = {
+  style?: CSSProperties
+} & ImageProps;
 
-export default function Image({
-  className,
-  style,
-  alt,
-  src,
-  width,
-  height,
-}: ImageProps) {
+export default function DecoratedImage({ style, className, ...props }: DecoratedImageProps) {
   const wrapperRef = useRef<HTMLImageElement>(null);
   const { inViewport, enterCount } = useInViewport(wrapperRef, undefined, {
     disconnectOnLeave: true,
@@ -32,20 +20,8 @@ export default function Image({
 
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  let imageElement;
-  if (!width || !height) {
-    console.error(
-      `No width or height for image ${src}(${alt}) so fall backing to <img> instead of <Image>`
-    );
-    imageElement = (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img alt={alt} src={src} />
-    );
-  } else {
-    imageElement = (
-      <NextImage alt={alt} src={src} width={width} height={height} />
-    );
-  }
+  // eslint-disable-next-line jsx-a11y/alt-text
+  let imageElement = <Image {...props} />
 
   const alreadyDisplayed = enterCount > 0;
 
