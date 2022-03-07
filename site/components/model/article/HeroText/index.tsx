@@ -21,7 +21,7 @@ export default function HeroText({
   style,
   children,
   headingLevel,
-  component = "h1",
+  component = "p",
 }: HeroTextProps) {
   return createElement(
     headingLevel ? `h${headingLevel}` : component,

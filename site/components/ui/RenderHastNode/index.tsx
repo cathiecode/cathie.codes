@@ -37,9 +37,8 @@ export default function RenderHastNode(props: RenderHastNodeProps) {
     return null;
   }
 
-
   if (node.type === "raw") {
-    return <>{node.value}</>
+    return <>{node.value}</>;
   }
 
   const renderer = renderers[node.tagName] ?? fallbackRenderer;
@@ -49,12 +48,12 @@ export default function RenderHastNode(props: RenderHastNodeProps) {
     throw new Error("No such tag renderer " + node.tagName);
   }
 
-  const children =
-    node.children.length === 0
-      ? undefined
-      : node.children.map((child, i) => (
-          <RenderHastNode {...props} node={child} key={i} />
-        ));
+  let children = null;
+  if (node.children && node.children.length !== 0) {
+    children = node.children.map((child, i) => (
+      <RenderHastNode {...props} node={child} key={i} />
+    ));
+  }
 
   return <>{renderer(children, node.properties ?? {}, node)}</>;
 }

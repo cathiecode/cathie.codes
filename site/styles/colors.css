@@ -1,9 +1,21 @@
 :root {
-  --black: #444468;
+  --black: #3d3d5c;
   --gray: #a2a2c2;
   --lightgray: #ececf4;
   --white: #fff;
   --blue: #2f2fff;
   --yellow: #ffd600;
   --red: #ff1d7e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --white: #2d2d42;
+    --lightgray: #a2a2c2;
+    --gray: #ececf4;
+    --black: #fff;
+    --blue: #2f2fff;
+    --yellow: #ffd600;
+    --red: #ff1d7e;
+  }
 }

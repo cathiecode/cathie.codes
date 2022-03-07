@@ -23,8 +23,6 @@ export default async function fetchContentfulImage(
 
   const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
 
-  console.log("fetching from", normalizedPath);
-
   const result = await fetch("https://images.ctfassets.net/" + normalizedPath);
 
   if (!result.ok) {

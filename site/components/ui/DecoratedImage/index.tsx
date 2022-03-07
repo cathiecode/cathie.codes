@@ -9,10 +9,15 @@ import Modal from "../Modal";
 import styles from "./styles.module.css";
 
 type DecoratedImageProps = {
-  style?: CSSProperties
+  style?: CSSProperties;
 } & ImageProps;
 
-export default function DecoratedImage({ style, className, ...props }: DecoratedImageProps) {
+export default function DecoratedImage({
+  src,
+  style,
+  className,
+  ...props
+}: DecoratedImageProps) {
   const wrapperRef = useRef<HTMLImageElement>(null);
   const { inViewport, enterCount } = useInViewport(wrapperRef, undefined, {
     disconnectOnLeave: true,
@@ -21,7 +26,7 @@ export default function DecoratedImage({ style, className, ...props }: Decorated
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   // eslint-disable-next-line jsx-a11y/alt-text
-  let imageElement = <Image {...props} />
+  let imageElement = <Image src={src} {...props} />;
 
   const alreadyDisplayed = enterCount > 0;
 
@@ -54,7 +59,8 @@ export default function DecoratedImage({ style, className, ...props }: Decorated
         onClose={useCallback(() => setIsFullscreen(false), [])}
         open={isFullscreen}
       >
-        {imageElement}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className={styles.modalImage} src={src} alt="" />
       </Modal>
     </div>
   );

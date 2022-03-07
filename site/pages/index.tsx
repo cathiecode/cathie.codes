@@ -3,6 +3,7 @@ import fetchHomeContents, { HomeContents } from "api/fetchHomeContents";
 import Page from "components/model/global/Page";
 import Home from "components/page/Home";
 import type { GetStaticProps, NextPage } from "next";
+import hastAddBlurDataUrl from "utils/hastAddBlurDataUrl";
 
 type IndexProps = {
   contents: HomeContents;
@@ -23,6 +24,8 @@ const Index: NextPage<IndexProps> = ({
 export const getStaticProps: GetStaticProps = async ({}) => {
   const contents = await fetchHomeContents();
   const globalContents = await fetchGlobalContents();
+
+  await hastAddBlurDataUrl(contents.body);
 
   return { props: { contents, globalContents } };
 };

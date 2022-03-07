@@ -18,7 +18,7 @@
 .logo {
   font-size: 2rem;
   font-weight: bold;
-  color: var(--gray);
+  color: var(--lightgray);
 
   @include breakpoint(sp) {
     text-align: center;
@@ -32,7 +32,7 @@
 }
 
 .nav {
-  color: #fff;
+  color: var(--white);
   line-height: 1.5em;
 
   @include breakpoint(sp) {

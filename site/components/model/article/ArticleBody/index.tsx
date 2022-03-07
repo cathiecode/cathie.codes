@@ -22,14 +22,7 @@ export default function ArticleBody({ body }: ArticleBodyProps) {
           h4: (children) => <Heading level={4}>{children}</Heading>,
           h5: (children) => <Heading level={5}>{children}</Heading>,
           h6: (children) => <Heading level={6}>{children}</Heading>,
-          img: (_, props) => (
-            <ArticleImage
-              src={props["src"] as string}
-              alt={props["alt"] as string}
-              width={Number(props["width"])}
-              height={Number(props["height"])}
-            />
-          ),
+          img: (_, props) => <ArticleImage {...(props as any)} />,
           a: (children, { href, ...props }) =>
             typeof href === "string" && !href.startsWith("http") ? (
               <Link href={href}>
@@ -42,7 +35,11 @@ export default function ArticleBody({ body }: ArticleBodyProps) {
             ),
         }}
         fallbackRenderer={(children, properties, element) => {
-          console.error(`Fallbacking element <${element.tagName}>`);
+          console.error(
+            `Fallbacking element <${element.tagName}> at ${JSON.stringify(
+              element.position
+            )}`
+          );
           return createElement(element.tagName, properties, children);
         }}
         node={body}

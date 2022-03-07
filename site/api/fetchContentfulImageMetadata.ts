@@ -23,17 +23,13 @@ export default async function fetchContentfulImageMetadata(
     return;
   }
 
-  console.log(
-    `/spaces/${spaceId}/environments/.../assets/${assetId}?access_token=...`
-  );
-
   const result = await fetchContentful(
     ({ access_token, environment_id }) =>
       `/spaces/${spaceId}/environments/${environment_id}/assets/${assetId}?access_token=${access_token}`
   );
 
   const placeholder = await fetchContentfulImage(
-    () => parsedUrl.pathname + "?fm=png&w=16&h=16"
+    () => parsedUrl.pathname + "?fm=png&w=8"
   );
 
   return {

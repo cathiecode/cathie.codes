@@ -1,9 +1,5 @@
 export default async function fetchContentful(
-  pathGenerator: (env: {
-    space_id: string;
-    access_token: string;
-    environment_id: string;
-  }) => string
+  pathGenerator: (env: { space_id: string; environment_id: string }) => string
 ): Promise<{ [key: string | number]: any }> {
   if (
     !process.env.CONTENTFUL_SPACE_ID ||
@@ -17,13 +13,16 @@ export default async function fetchContentful(
 
   const path = pathGenerator({
     space_id: process.env.CONTENTFUL_SPACE_ID,
-    access_token: process.env.CONTENTFUL_ACCESS_TOKEN,
     environment_id: process.env.CONTENTFUL_ENVIRONMENT_ID,
   });
 
   const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
 
-  const result = await fetch("https://cdn.contentful.com/" + normalizedPath);
+  const result = await fetch("https://cdn.contentful.com/" + normalizedPath, {
+    headers: {
+      Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+    },
+  });
 
   if (!result.ok) {
     console.error(result.status);

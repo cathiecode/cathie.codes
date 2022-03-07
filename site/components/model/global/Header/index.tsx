@@ -74,7 +74,9 @@ export default function Header() {
             <button className={styles.lock} onClick={onLockClicked}>
               <FontAwesomeIcon
                 icon={faThumbTack}
-                style={{ color: isLocked ? "var(--black)" : "var(--gray)" }}
+                style={{
+                  color: isLocked ? "var(--black)" : "var(--lightgray)",
+                }}
               />
             </button>
           </div>

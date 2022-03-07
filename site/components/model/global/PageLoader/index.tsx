@@ -19,7 +19,6 @@ export default function PageLoader({ className, style }: PageLoaderProps) {
 
   useEffect(() => {
     const handleStart = (url: string) => {
-      console.log(`Loading: ${url}`);
       setIsLoading(true);
       setLoaderKey((key) => key + 1);
     };

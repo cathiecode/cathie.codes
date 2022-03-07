@@ -37,7 +37,6 @@ const Article: NextPage<ArticleProps> = ({
   article,
   globalContents,
 }: ArticleProps) => {
-  console.log(article.body);
   return (
     <Page globalContents={globalContents}>
       <article>

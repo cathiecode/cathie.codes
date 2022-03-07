@@ -1,4 +1,4 @@
-import fetchCotnentful from "./fetchContenteful";
+import fetchContentful from "./fetchContenteful";
 import { HastNode } from "mdast-util-to-hast/lib";
 import transformContentfulBody from "./transformContentfulBody";
 
@@ -11,7 +11,7 @@ export type PageContents = {
 export default async function fetchPageContents(
   id: string
 ): Promise<PageContents> {
-  const response = await fetchCotnentful(
+  const response = await fetchContentful(
     ({ environment_id, access_token, space_id }) =>
       `/spaces/${space_id}/environments/${environment_id}/entries?content_type=page&access_token=${access_token}&fields.id[match]=${id}`
   );
