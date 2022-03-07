@@ -26,7 +26,7 @@ export default async function fetchContentful(
   const result = await fetch("https://cdn.contentful.com/" + normalizedPath);
 
   if (!result.ok) {
-    console.error(result.status);
+    console.error(result.status, normalizedPath);
     throw new Error("Failed to fetch contents");
   }
 

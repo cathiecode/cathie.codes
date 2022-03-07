@@ -16,15 +16,6 @@ export default function Page({ children, globalContents }: PageProps) {
   return (
     <div className={styles.Page}>
       <GlobalContentsContext.Provider value={globalContents}>
-        <PageLoader
-          style={{
-            position: "fixed",
-            zIndex: 1,
-            width: "100%",
-            height: "4px",
-            top: 0,
-          }}
-        />
         <Header />
         <div className={styles.contents}>{children}</div>
         <Footer />

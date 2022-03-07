@@ -13,6 +13,7 @@ import dayjs from "dayjs";
 import { HastNode } from "mdast-util-to-hast/lib";
 import { GetStaticPropsContext, NextPage } from "next";
 import { Tag } from "types/Tag";
+import injectGlobalContents from "utils/injectGlobalContents";
 
 type WorksArticle = {
   title: string;
@@ -86,7 +87,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
   const entry = await fetchEntry(workId as string);
 
-  return {
+  return injectGlobalContents({
     props: {
       article: {
         title: entry.title,
@@ -99,7 +100,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         tags: entry.tags ?? [],
       },
     },
-  };
+  });
 }
 
 export default WorksPost;

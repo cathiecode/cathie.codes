@@ -13,6 +13,7 @@ import dayjs from "dayjs";
 import { HastNode } from "mdast-util-to-hast/lib";
 import { GetStaticPropsContext, NextPage } from "next";
 import { Tag } from "types/Tag";
+import injectGlobalContents from "utils/injectGlobalContents";
 
 type ExtPostProps = {
   title: string;
@@ -42,12 +43,12 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
   const entry = await fetchEntry(extId as string);
 
-  return {
+  return injectGlobalContents({
     props: {
       title: entry.title,
       ext: entry.url,
     },
-  };
+  });
 }
 
 export default ExtPost;

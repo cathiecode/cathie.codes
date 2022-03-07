@@ -19,6 +19,7 @@ import {
 import Image from "next/image";
 import { parse, parseFragment } from "parse5";
 import React from "react";
+import injectGlobalContents from "utils/injectGlobalContents";
 
 type ArticleData = {
   title: string;
@@ -65,7 +66,7 @@ const Article: NextPage<ArticleProps> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export function getStaticProps() {
   const article: ArticleData = {
     title: "リブロ・イラストラド",
     coverImage:
@@ -76,9 +77,7 @@ export const getStaticProps: GetStaticProps = async () => {
     body: toHast(fromMarkdown("")) ?? { type: "root", children: [] },
   };
 
-  const globalContents = await fetchGlobalContents();
-
-  return { props: { article, globalContents } };
-};
+  return injectGlobalContents({ props: { article } });
+}
 
 export default Article;

@@ -69,8 +69,8 @@ export default function Header() {
             <Link href="/">
               <a className={styles.logo}>cathie.codes</a>
             </Link>
-            <div className={styles.navItem}>トップ</div>
             <div className={styles.navItem}>ポートフォリオ</div>
+            <div className={styles.navItem}>日記</div>
             <button className={styles.lock} onClick={onLockClicked}>
               <FontAwesomeIcon
                 icon={faThumbTack}

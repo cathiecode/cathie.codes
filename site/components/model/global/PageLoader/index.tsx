@@ -20,6 +20,7 @@ export default function PageLoader({ className, style }: PageLoaderProps) {
   useEffect(() => {
     const handleStart = (url: string) => {
       setIsLoading(true);
+      setFakeProgress(0);
       setLoaderKey((key) => key + 1);
     };
     const handleStop = () => {
@@ -39,17 +40,17 @@ export default function PageLoader({ className, style }: PageLoaderProps) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFakeProgress((prev) => prev + 1);
-    }, 500);
+      setFakeProgress((prev) => prev + 0.5);
+    }, 1000);
     return () => {
       clearInterval(interval);
     };
-  });
+  }, [loaderKey]);
 
   return (
     <svg
       key={loaderKey}
-      style={{ ...style, opacity: isLoading ? 1 : 0 }}
+      style={{ ...style, opacity: isLoading && fakeProgress !== 0 ? 1 : 0 }}
       className={`${className ?? ""} ${styles.PageLoader}`}
       width="100px"
       height="1px"

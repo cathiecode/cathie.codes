@@ -14,6 +14,8 @@ export default async function fetchEntryList(
     ...item.fields,
   }));
 
+  console.log(items);
+
   return {
     items: items,
     raw: response,

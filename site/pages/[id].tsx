@@ -1,6 +1,7 @@
 import fetchEntry from "api/fetchArticle";
 import fetchEntryList from "api/fetchEntryList";
 import { GlobalContents } from "api/fetchGlobalContents";
+import transformContentfulBody from "api/transformContentfulBody";
 import ArticleBody from "components/model/article/ArticleBody";
 import Hero from "components/model/article/Hero";
 import HeroHorizontalLine from "components/model/article/HeroHorizontalLine";
@@ -13,6 +14,7 @@ import dayjs from "dayjs";
 import { HastNode } from "mdast-util-to-hast/lib";
 import { GetStaticPropsContext, NextPage } from "next";
 import { Tag } from "types/Tag";
+import injectGlobalContents from "utils/injectGlobalContents";
 
 type PageArticle = {
   id: string;
@@ -32,6 +34,9 @@ const PagePost: NextPage<PagePostProps> = ({
   return (
     <Page globalContents={globalContents}>
       <article>
+        <Hero>
+          <HeroTitle>{article.title}</HeroTitle>
+        </Hero>
         <Container>
           <ArticleBody body={article.body} />
         </Container>
@@ -51,21 +56,21 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   if (!context.params) {
-    throw new Error("No ext post id specified");
+    throw new Error("No page post id specified");
   }
 
-  const extId = context.params["id"];
+  const pageId = context.params["id"];
 
-  const entry = await fetchEntry(extId as string);
+  const entry = (await fetchEntryList("page", `fields.id=${pageId}`)).items[0];
 
-  return {
+  return injectGlobalContents({
     props: {
       article: {
         title: entry.title,
-        ext: entry.url,
+        body: await transformContentfulBody(entry.body),
       },
     },
-  };
+  });
 }
 
 export default PagePost;
