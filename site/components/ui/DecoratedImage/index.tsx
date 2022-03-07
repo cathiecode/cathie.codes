@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpRightAndDownLeftFromCenter } from "@fortawesome/free-solid-svg-icons";
 import { useRef, useCallback, useState, CSSProperties } from "react";
 import Image, { ImageProps } from "../Image";
-import { useInViewport } from "react-in-viewport";
+import { useInView } from "react-intersection-observer";
 import IconicOneTimeLineAnimation from "../IconicOneTimeLineAnimation";
 import Modal from "../Modal";
 
@@ -18,9 +18,9 @@ export default function DecoratedImage({
   className,
   ...props
 }: DecoratedImageProps) {
-  const wrapperRef = useRef<HTMLImageElement>(null);
-  const { inViewport, enterCount } = useInViewport(wrapperRef, undefined, {
-    disconnectOnLeave: true,
+  const { ref: wrapperRef, inView } = useInView({
+    threshold: 1.0,
+    triggerOnce: true,
   });
 
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -28,18 +28,16 @@ export default function DecoratedImage({
   // eslint-disable-next-line jsx-a11y/alt-text
   let imageElement = <Image src={src} {...props} />;
 
-  const alreadyDisplayed = enterCount > 0;
-
   return (
     <div
       style={style}
       className={`
         ${className ?? ""}
         ${styles.Image}
-        ${alreadyDisplayed ? styles.inViewport : ""}`}
+        ${inView ? styles.inViewport : ""}`}
       ref={wrapperRef}
     >
-      {alreadyDisplayed ? (
+      {inView ? (
         <>
           <IconicOneTimeLineAnimation className={styles.animationLeft} />
           <IconicOneTimeLineAnimation className={styles.animationRight} />

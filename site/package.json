@@ -27,7 +27,7 @@
     "node-fetch": "^3.2.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-in-viewport": "^1.0.0-alpha.20",
+    "react-intersection-observer": "^8.33.1",
     "react-transition-group": "^4.4.2",
     "sharp": "^0.30.2",
     "unist-util-visit": "^4.1.0",

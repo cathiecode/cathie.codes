@@ -4,6 +4,7 @@ import { GlobalContents } from "api/fetchGlobalContents";
 import ArticleBody from "components/model/article/ArticleBody";
 import Hero from "components/model/article/Hero";
 import HeroHorizontalLine from "components/model/article/HeroHorizontalLine";
+import HeroTags from "components/model/article/HeroTags";
 import HeroText from "components/model/article/HeroText";
 import HeroTitle from "components/model/article/HeroTitle";
 import Page from "components/model/global/Page";
@@ -49,7 +50,7 @@ const BlogPost: NextPage<BlogPostProps> = ({
           <HeroText>{dayjs(article.date).format("YYYY/MM/DD")}</HeroText>
           <HeroTitle>{article.title}</HeroTitle>
           <HeroHorizontalLine />
-          <HeroText>{article.tags.map((tag) => `#${tag.name}`)}</HeroText>
+          <HeroTags tags={article.tags} />
         </Hero>
         <Container>
           <ArticleBody body={article.body} />
