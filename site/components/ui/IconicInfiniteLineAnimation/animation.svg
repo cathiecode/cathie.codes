@@ -1,27 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="450" height="800" version="1.1" viewBox="0 0 450 800" xmlns="http://www.w3.org/2000/svg">
-  <g class="iconicInfiniteLineAnimation" transform="translate(-41.862 -102.16)" fill="none" stroke-width="16">
-    <path d="m477.53-40.916-464.3 804.2" stroke="#ececf4" stroke-dasharray="80, 20, 60, 40" pathLength="150" />
-    <path d="m392-12.425-464.3 804.2" stroke="#2f2fff" stroke-dasharray="90, 20, 50, 40" pathLength="80" />
-    <path d="m325.8-61.87-464.3 804.2" stroke="#ececf4" stroke-dasharray="0, 20, 80, 20, 80, 0" pathLength="120" />
-    <path d="m487.68 77.723-464.3 804.2" stroke="#ffd600" stroke-dasharray="60, 40, 70, 30" pathLength="100" />
-  </g>
-  <style>
-    .iconicInfiniteLineAnimation>path {
-      animation: infiniteLineAnimation 5000ms linear infinite both;
-      will-change: stroke-dashoffset;
-    }
-
-    @keyframes infiniteLineAnimation {
-      from {
-        stroke-dashoffset: 0;
-      }
-
-      to {
-        /* NOTE: sum of stroke-dasharray */
-        stroke-dashoffset: 200;
-      }
-    }
-  </style>
-
-</svg>
+version https://git-lfs.github.com/spec/v1
+oid sha256:3ac062b7d3b3b3b4ee6d315fa635983d99ba91f7209d4ffad2774779a3342d6b
+size 1081
