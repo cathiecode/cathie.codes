@@ -4,6 +4,7 @@ import { HastNode } from "mdast-util-to-hast/lib";
 import Link from "next/link";
 import { createElement } from "react";
 import ArticleImage from "../ArticleImage";
+import Code from "../Code";
 
 import styles from "./styles.module.scss";
 
@@ -22,6 +23,16 @@ export default function ArticleBody({ body }: ArticleBodyProps) {
           h4: (children) => <Heading level={4}>{children}</Heading>,
           h5: (children) => <Heading level={5}>{children}</Heading>,
           h6: (children) => <Heading level={6}>{children}</Heading>,
+          code: (children, attributes, node) => (
+            <Code
+              {...attributes}
+              language={node.data?.["language"] as string}
+              highlightedHtml={
+                (node.data?.["highlighted"] as string) ??
+                "// Something went wrong... sorry..."
+              }
+            />
+          ),
           img: (_, props) => <ArticleImage {...(props as any)} />,
           a: (children, { href, ...props }) =>
             typeof href === "string" && !href.startsWith("http") ? (

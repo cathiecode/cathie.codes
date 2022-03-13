@@ -10,7 +10,9 @@ export default function HeroTags({ tags }: HeroTagsProps) {
   return (
     <div className={styles.HeroTags}>
       {tags.map((tag) => (
-        <Tag key={tag.id}>{tag.name}</Tag>
+        <Tag key={tag.id} id={tag.id}>
+          {tag.name}
+        </Tag>
       ))}
     </div>
   );

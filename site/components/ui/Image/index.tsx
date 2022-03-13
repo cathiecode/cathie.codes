@@ -23,14 +23,19 @@ export default function Image({
   width,
   height,
   alt,
+  layout,
   blurDataUrl,
+  ...props
 }: ImageProps) {
   let imageElement;
-  if (!width || !height || !blurDataUrl) {
+  if (
+    (layout && (width || height)) ||
+    (!layout && (!width || !height)) ||
+    !blurDataUrl
+  ) {
     console.error(
       `No width, height or blurDataUrl for image ${src}(${alt}) so fall backing to <img> instead of <Image>`
     );
-    console.error(width, height, blurDataUrl);
     imageElement = (
       // eslint-disable-next-line @next/next/no-img-element
       <img
@@ -39,6 +44,7 @@ export default function Image({
         width={width}
         height={height}
         className={className}
+        {...props}
       />
     );
   } else {
@@ -70,6 +76,8 @@ export default function Image({
         className={className}
         placeholder="blur"
         loader={loader}
+        layout={layout}
+        {...props}
       />
     );
   }

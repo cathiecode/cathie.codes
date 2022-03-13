@@ -2,23 +2,23 @@
   --black: #3d3d5c;
   --gray: #a2a2c2;
   --lightgray: #ececf4;
+  --lightgray-highlight: #f5f5fa;
   --white: #fff;
   --blue: #2f2fff;
   --yellow: #ffd600;
   --red: #ff1d7e;
+  --green: #2fff84;
 
   --white-transparent: rgba(255, 255, 255, 0.8);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --white: #2d2d42;
-    --lightgray: #a2a2c2;
-    --gray: #ececf4;
     --black: #fff;
-    --blue: #2f2fff;
-    --yellow: #ffd600;
-    --red: #ff1d7e;
+    --gray: #ececf4;
+    --lightgray: #a2a2c2;
+    --lightgray-highlight: #3a3a52;
+    --white: #2d2d42;
 
     --white-transparent: rgba(45, 45, 66, 0.8);
   }

@@ -4,12 +4,15 @@ import { GlobalContents } from "api/fetchGlobalContents";
 import ArticleBody from "components/model/article/ArticleBody";
 import Hero from "components/model/article/Hero";
 import HeroHorizontalLine from "components/model/article/HeroHorizontalLine";
+import HeroTags from "components/model/article/HeroTags";
 import HeroText from "components/model/article/HeroText";
 import HeroTitle from "components/model/article/HeroTitle";
+import BreadClumbList from "components/model/global/BreadClumbList";
 import Page from "components/model/global/Page";
 import Container from "components/ui/Container";
 import Image from "components/ui/Image";
 import dayjs from "dayjs";
+import { url } from "inspector";
 import { HastNode } from "mdast-util-to-hast/lib";
 import { GetStaticPropsContext, NextPage } from "next";
 import { Tag } from "types/Tag";
@@ -22,7 +25,12 @@ type WorksArticle = {
   body: HastNode;
   dateStart: string;
   dateEnd: string;
-  coverImage: string;
+  coverImage: {
+    url: string;
+    blurImageUrl: string;
+    width: number;
+    height: number;
+  };
   tags: Tag[];
 };
 
@@ -41,7 +49,9 @@ const WorksPost: NextPage<WorksPostProps> = ({
         <Hero
           background={({ className }) => (
             <Image
-              src="https://cathie.codes/assets/portfolio/libro_ilustrado/title.png"
+              src={article.coverImage.url}
+              blurDataUrl={article.coverImage.blurImageUrl}
+              placeholder="blur"
               layout="fill"
               objectFit="cover"
               alt=""
@@ -52,17 +62,18 @@ const WorksPost: NextPage<WorksPostProps> = ({
           <HeroText>
             {dayjs(article.dateStart).format("YYYY/MM/DD")}
             {article.dateEnd
-              ? dayjs(article.dateStart).isSame(article.dateEnd, "year")
-                ? dayjs(article.dateStart).format("- YYYY/MM/DD")
-                : dayjs(article.dateStart).format("- MM/DD")
+              ? dayjs(article.dateEnd).isSame(article.dateEnd, "year")
+                ? dayjs(article.dateEnd).format("- YYYY/MM/DD")
+                : dayjs(article.dateEnd).format("- MM/DD")
               : ""}
           </HeroText>
           <HeroTitle>{article.title}</HeroTitle>
           <HeroHorizontalLine />
-          <HeroText>{article.tags.map((tag) => `#${tag.name}`)}</HeroText>
+          <HeroTags tags={article.tags} />
         </Hero>
         <Container>
           <ArticleBody body={article.body} />
+          <BreadClumbList pageTitle={article.title} />
         </Container>
       </article>
     </Page>
@@ -71,8 +82,8 @@ const WorksPost: NextPage<WorksPostProps> = ({
 
 export async function getStaticPaths() {
   return {
-    paths: (await fetchEntryList("work")).items.map(
-      (item: any) => `/works/${item.id}`
+    paths: (await fetchEntryList("work")).map(
+      (item: any) => `/works/${item.sys.id}`
     ),
     fallback: false,
   };

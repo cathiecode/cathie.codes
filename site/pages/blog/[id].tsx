@@ -7,6 +7,7 @@ import HeroHorizontalLine from "components/model/article/HeroHorizontalLine";
 import HeroTags from "components/model/article/HeroTags";
 import HeroText from "components/model/article/HeroText";
 import HeroTitle from "components/model/article/HeroTitle";
+import BreadClumbList from "components/model/global/BreadClumbList";
 import Page from "components/model/global/Page";
 import Container from "components/ui/Container";
 import Image from "components/ui/Image";
@@ -21,7 +22,12 @@ type BlogArticle = {
   body: HastNode;
   date: string;
   tags: Tag[];
-  coverImage: string;
+  coverImage?: {
+    url: string;
+    blurImageUrl: string;
+    width: number;
+    height: number;
+  };
 };
 
 type BlogPostProps = {
@@ -37,15 +43,20 @@ const BlogPost: NextPage<BlogPostProps> = ({
     <Page globalContents={globalContents}>
       <article>
         <Hero
-          background={({ className }) => (
-            <Image
-              src="https://cathie.codes/assets/portfolio/libro_ilustrado/title.png"
-              layout="fill"
-              objectFit="cover"
-              alt=""
-              className={className}
-            />
-          )}
+          background={({ className }) =>
+            article.coverImage && (
+              <Image
+                src={article.coverImage?.url}
+                blurDataUrl={article.coverImage?.blurImageUrl}
+                placeholder="blur"
+                layout="fill"
+                objectFit="cover"
+                alt=""
+                className={className}
+                sizes="25vw"
+              />
+            )
+          }
         >
           <HeroText>{dayjs(article.date).format("YYYY/MM/DD")}</HeroText>
           <HeroTitle>{article.title}</HeroTitle>
@@ -54,6 +65,7 @@ const BlogPost: NextPage<BlogPostProps> = ({
         </Hero>
         <Container>
           <ArticleBody body={article.body} />
+          <BreadClumbList pageTitle={article.title} />
         </Container>
       </article>
     </Page>
@@ -62,8 +74,8 @@ const BlogPost: NextPage<BlogPostProps> = ({
 
 export async function getStaticPaths() {
   return {
-    paths: (await fetchEntryList("blog")).items.map(
-      (item: any) => `/blog/${item.id}`
+    paths: (await fetchEntryList("blog", { select: "" })).map(
+      (item: any) => `/blog/${item.sys.id}`
     ),
     fallback: false,
   };

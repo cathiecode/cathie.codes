@@ -1,23 +1,27 @@
-import fetchContentful from "./fetchContenteful";
+import contentful from "./contentful";
+import fetchContentfulTags from "./fetchContentfulTags";
+import transformAssetFields from "./transformAssetFields";
 
-export default async function fetchEntryList(
-  content_type: string,
-  query: string = ""
-) {
-  const response = await fetchContentful(
-    ({ environment_id, access_token, space_id }) =>
-      `/spaces/${space_id}/environments/${environment_id}/entries?access_token=${access_token}&content_type=${content_type}&${query}`
+export default async function fetchEntryList(type: string, query: object = {}) {
+  const result = (await contentful.parseEntries(
+    await contentful.getEntries({ content_type: type, ...query })
+  )) as any;
+
+  const tagPool = await fetchContentfulTags();
+
+  const transformedItems = await Promise.all(
+    result.items.map(async (item: any) => ({
+      ...item,
+      fields: await transformAssetFields(item.fields),
+      metadata: {
+        ...item.metadata,
+        tags: item.metadata.tags.map((item: any) => ({
+          id: item.sys.id,
+          name: tagPool[item.sys.id].name,
+        })),
+      },
+    }))
   );
 
-  const items = response["items"].map((item: any) => ({
-    ...item.sys,
-    ...item.fields,
-  }));
-
-  console.log(items);
-
-  return {
-    items: items,
-    raw: response,
-  };
+  return transformedItems;
 }

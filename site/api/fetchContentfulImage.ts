@@ -26,7 +26,6 @@ export default async function fetchContentfulImage(
   const result = await fetch("https://images.ctfassets.net/" + normalizedPath);
 
   if (!result.ok) {
-    console.error(result.status);
     throw new Error("Failed to fetch contents");
   }
 

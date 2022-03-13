@@ -25,7 +25,6 @@ export default async function fetchContentful(
   });
 
   if (!result.ok) {
-    console.error(result.status);
     throw new Error("Failed to fetch contents");
   }
 

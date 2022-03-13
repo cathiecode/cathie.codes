@@ -22,7 +22,7 @@ export default function HeroTitle({
   style,
   children,
   headingLevel,
-  component = "h1",
+  component = "div",
 }: HeroTitleProps) {
   return createElement(
     headingLevel ? `h${headingLevel}` : component,

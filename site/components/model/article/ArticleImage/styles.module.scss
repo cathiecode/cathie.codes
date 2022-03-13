@@ -1,7 +1,16 @@
+@use "../../../../styles/breakpoints.scss" as *;
+
 .ArticleImage {
   display: block;
   margin: 1rem;
   padding: 1rem !important;
   background-color: var(--white);
   float: inline-end;
+
+  @include breakpoint(sp) {
+  }
+
+  @include breakpoint(pc) {
+    width: 50%;
+  }
 }

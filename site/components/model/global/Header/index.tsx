@@ -69,16 +69,22 @@ export default function Header() {
             <Link href="/">
               <a className={styles.logo}>cathie.codes</a>
             </Link>
-            <div className={styles.navItem}>ポートフォリオ</div>
-            <div className={styles.navItem}>日記</div>
-            <button className={styles.lock} onClick={onLockClicked}>
-              <FontAwesomeIcon
-                icon={faThumbTack}
-                style={{
-                  color: isLocked ? "var(--black)" : "var(--lightgray)",
-                }}
-              />
-            </button>
+            <Link href="/works">
+              <a className={styles.navItem}>ポートフォリオ</a>
+            </Link>
+            <Link href="/blog">
+              <a className={styles.navItem}>日記</a>
+            </Link>
+            <div>
+              <button className={styles.lock} onClick={onLockClicked}>
+                <FontAwesomeIcon
+                  icon={faThumbTack}
+                  style={{
+                    color: isLocked ? "var(--black)" : "var(--lightgray)",
+                  }}
+                />
+              </button>
+            </div>
           </div>
         )}
       </Transition>

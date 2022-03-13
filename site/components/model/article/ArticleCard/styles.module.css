@@ -1,0 +1,38 @@
+.ArticleCard {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+
+  border-radius: 0.25rem;
+  transition: background-color 180ms linear;
+}
+
+.ArticleCard:hover {
+  background-color: var(--lightgray-highlight);
+}
+
+.cover {
+  overflow: hidden;
+  position: relative;
+  background-color: var(--lightgray);
+  width: 4rem;
+  height: 4rem;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.date {
+  color: var(--gray);
+}
+
+.tag {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.tag:before {
+  content: "#";
+}

@@ -1,0 +1,19 @@
+.Notification {
+  margin-top: 1rem;
+  background-color: var(--lightgray-highlight);
+  color: black;
+  border: solid 1px var(--lightgray);
+  border-radius: 0.25rem;
+
+  padding: 1rem;
+
+  &[class*="notification"] {
+    border-color: var(--lightgray);
+  }
+  &[class*="warn"] {
+    border-color: var(--yellow);
+  }
+  &[class*="error"] {
+    border-color: var(--red);
+  }
+}

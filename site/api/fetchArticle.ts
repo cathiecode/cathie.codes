@@ -1,13 +1,14 @@
 import { Tag } from "types/Tag";
+import contentful from "./contentful";
 import fetchContentful from "./fetchContenteful";
 import fetchContentfulTags from "./fetchContentfulTags";
+import transformAssetFields from "./transformAssetFields";
 import transformContentfulBody from "./transformContentfulBody";
 
 export default async function fetchEntry(entry_id: string) {
-  const response = await fetchContentful(
-    ({ environment_id, access_token, space_id }) =>
-      `/spaces/${space_id}/environments/${environment_id}/entries/${entry_id}?access_token=${access_token}`
-  );
+  const response = (await contentful.parseEntries(
+    await contentful.getEntry(entry_id)
+  )) as any;
 
   const tagPool = await fetchContentfulTags();
 
@@ -25,7 +26,7 @@ export default async function fetchEntry(entry_id: string) {
   return {
     ...response.sys,
     ...response.metadata,
-    ...response.fields,
+    ...(await transformAssetFields(response.fields)),
     ...(body ? { body } : {}),
     tags: tags,
     raw: response,

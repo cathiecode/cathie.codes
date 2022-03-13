@@ -1,19 +1,13 @@
-import fetchEntry from "api/fetchArticle";
 import fetchEntryList from "api/fetchEntryList";
 import { GlobalContents } from "api/fetchGlobalContents";
 import transformContentfulBody from "api/transformContentfulBody";
 import ArticleBody from "components/model/article/ArticleBody";
 import Hero from "components/model/article/Hero";
-import HeroHorizontalLine from "components/model/article/HeroHorizontalLine";
-import HeroText from "components/model/article/HeroText";
 import HeroTitle from "components/model/article/HeroTitle";
 import Page from "components/model/global/Page";
 import Container from "components/ui/Container";
-import Image from "components/ui/Image";
-import dayjs from "dayjs";
 import { HastNode } from "mdast-util-to-hast/lib";
 import { GetStaticPropsContext, NextPage } from "next";
-import { Tag } from "types/Tag";
 import injectGlobalContents from "utils/injectGlobalContents";
 
 type PageArticle = {
@@ -47,9 +41,7 @@ const PagePost: NextPage<PagePostProps> = ({
 
 export async function getStaticPaths() {
   return {
-    paths: (await fetchEntryList("page")).items.map(
-      (item: any) => `/${item.id}`
-    ),
+    paths: (await fetchEntryList("page")).map((item: any) => `/${item.id}`),
     fallback: false,
   };
 }
@@ -61,7 +53,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
   const pageId = context.params["id"];
 
-  const entry = (await fetchEntryList("page", `fields.id=${pageId}`)).items[0];
+  const entry = (await fetchEntryList("page", { "fields.id": pageId }))[0];
 
   return injectGlobalContents({
     props: {

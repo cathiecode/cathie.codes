@@ -52,7 +52,7 @@
   left: 0;
   top: 0;
 
-  height: 2rem;
+  height: 4rem;
 }
 
 .animationRight {
@@ -60,7 +60,7 @@
   right: 0;
   bottom: 0;
 
-  height: 2rem;
+  height: 4rem;
 }
 
 .Image:hover .zoom {

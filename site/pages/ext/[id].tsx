@@ -1,18 +1,10 @@
 import fetchEntry from "api/fetchArticle";
 import fetchEntryList from "api/fetchEntryList";
 import { GlobalContents } from "api/fetchGlobalContents";
-import ArticleBody from "components/model/article/ArticleBody";
-import Hero from "components/model/article/Hero";
-import HeroHorizontalLine from "components/model/article/HeroHorizontalLine";
-import HeroText from "components/model/article/HeroText";
-import HeroTitle from "components/model/article/HeroTitle";
+import InlineFrame from "components/model/external/InlineFrame";
 import Page from "components/model/global/Page";
 import Container from "components/ui/Container";
-import Image from "components/ui/Image";
-import dayjs from "dayjs";
-import { HastNode } from "mdast-util-to-hast/lib";
 import { GetStaticPropsContext, NextPage } from "next";
-import { Tag } from "types/Tag";
 import injectGlobalContents from "utils/injectGlobalContents";
 
 type ExtPostProps = {
@@ -21,13 +13,23 @@ type ExtPostProps = {
   globalContents: GlobalContents;
 };
 
-const ExtPost: NextPage<ExtPostProps> = ({ globalContents }: ExtPostProps) => {
-  return <Page globalContents={globalContents}>TODO</Page>;
+const ExtPost: NextPage<ExtPostProps> = ({
+  globalContents,
+  title,
+  url,
+}: ExtPostProps) => {
+  return (
+    <Page globalContents={globalContents}>
+      <Container>
+        <InlineFrame src={url} />
+      </Container>
+    </Page>
+  );
 };
 
 export async function getStaticPaths() {
   return {
-    paths: (await fetchEntryList("external")).items.map(
+    paths: (await fetchEntryList("external")).map(
       (item: any) => `/ext/${item.id}`
     ),
     fallback: false,
@@ -46,7 +48,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   return injectGlobalContents({
     props: {
       title: entry.title,
-      ext: entry.url,
+      url: entry.url,
     },
   });
 }

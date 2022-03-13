@@ -1,0 +1,11 @@
+.BreadClumbList {
+  color: var(--gray);
+  margin-top: 1em;
+}
+
+.link {
+}
+
+.arrow {
+  margin: 0 0.5em;
+}

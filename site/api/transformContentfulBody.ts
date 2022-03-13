@@ -1,16 +1,16 @@
+import hljs from "highlight.js";
+import { h } from "hastscript";
 import { defaultSchema, sanitize } from "hast-util-sanitize";
 import { fromMarkdown } from "mdast-util-from-markdown";
 import { toHast } from "mdast-util-to-hast";
 import { HastNode } from "mdast-util-to-hast/lib";
 import { visit } from "unist-util-visit";
 import { gfm } from "micromark-extension-gfm";
+import { toText } from "hast-util-to-text";
 import { gfmFromMarkdown, gfmToMarkdown } from "mdast-util-gfm";
 import fetchContentfulImageMetadata from "./fetchContentfulImageMetadata";
 import getResizedImage from "./getResizedImage";
-
-const allowedContents = {
-  ...defaultSchema,
-};
+import deepmerge from "deepmerge";
 
 export default async function transformContentfulBody(
   body: string
@@ -29,7 +29,10 @@ export default async function transformContentfulBody(
     };
   }
 
-  const sanitized = sanitize(parsed);
+  const sanitized = sanitize(
+    parsed,
+    deepmerge(defaultSchema, { attributes: { "*": ["className"] } })
+  );
 
   const waitPromise: Promise<void>[] = [];
 
@@ -72,6 +75,18 @@ export default async function transformContentfulBody(
           });
         })()
       );
+    } else if (node.tagName === "code") {
+      const code = toText(node, {
+        whitespace: "pre",
+      });
+      const language = ((node.properties?.["className"] ?? []) as string[])
+        .filter((className) => /^language-/.test(className))
+        .map((languageClass) => languageClass.slice("language-".length))?.[0];
+      node.data = {
+        language: language ?? null,
+        highlighted: hljs.highlight(code, { language: language ?? undefined })
+          .value,
+      };
     }
   });
 

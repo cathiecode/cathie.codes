@@ -1,0 +1,7 @@
+.InlineFrame {
+  border: solid 1px var(--lightgray);
+  border-radius: 0.25rem;
+  padding: 1rem;
+  width: 100%;
+  outline: none;
+}
