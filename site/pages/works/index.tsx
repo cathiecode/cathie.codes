@@ -6,6 +6,7 @@ import HeroHorizontalLine from "components/model/article/HeroHorizontalLine";
 import HeroText from "components/model/article/HeroText";
 import HeroTitle from "components/model/article/HeroTitle";
 import Page from "components/model/global/Page";
+import WorkCard from "components/model/works/WorkCard";
 import Container from "components/ui/Container";
 import { GetStaticPropsContext, NextPage } from "next";
 import Link from "next/link";
@@ -15,9 +16,17 @@ import injectGlobalContents from "utils/injectGlobalContents";
 type WorksArticleMetadata = {
   id: string;
   title: string;
-  date: string;
+  copyText: string;
+  leadText: string;
+  dateStart: string;
+  dateEnd: string;
+  coverImage: {
+    url: string;
+    blurImageUrl: string;
+    width: number;
+    height: number;
+  };
   tags: Tag[];
-  coverImage: string;
 };
 
 type WorksPostProps = {
@@ -31,30 +40,20 @@ const WorksPost: NextPage<WorksPostProps> = ({
 }: WorksPostProps) => {
   return (
     <Page globalContents={globalContents}>
-      <article>
-        <Hero>
-          <HeroTitle>作品</HeroTitle>
-          <HeroHorizontalLine />
-          <HeroText>作品カテゴリの記事の一覧です！</HeroText>
-        </Hero>
-        <Container>
-          {articles.map((article: any) => (
-            <Link href={`/works/${article.id}`} key={article.id} passHref>
-              <a>
-                <ArticleCard {...article} />
-              </a>
-            </Link>
-          ))}
-        </Container>
-      </article>
+      <Hero>
+        <HeroTitle>作品</HeroTitle>
+        <HeroHorizontalLine />
+        <HeroText>作品カテゴリの記事の一覧です！</HeroText>
+      </Hero>
+      {articles.map((article) => (
+        <WorkCard key={article.id} workArticle={article} />
+      ))}
     </Page>
   );
 };
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  const entries = await fetchEntryList("work", {
-    select: "sys.id,fields.title,metadata.tags,sys.createdAt,fields.coverImage",
-  });
+  const entries = await fetchEntryList("work");
 
   return injectGlobalContents({
     props: {
@@ -63,6 +62,10 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         title: item.fields.title,
         tags: item.metadata.tags,
         date: item.sys.createdAt,
+        leadText: item.fields.leadText,
+        dateStart: item.fields.dateStart,
+        dateEnd: item.fields.dateEnd,
+        copyText: item.fields.copyText,
         coverImage: item.fields.coverImage ?? null,
       })),
     },

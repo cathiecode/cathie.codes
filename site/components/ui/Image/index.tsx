@@ -15,6 +15,7 @@ export type ImageProps = {
   className?: string;
   blurDataUrl?: string;
   layout?: string;
+  objectFit?: string;
 } & Partial<NextImageProps>;
 
 export default function Image({
@@ -25,6 +26,7 @@ export default function Image({
   alt,
   layout,
   blurDataUrl,
+  objectFit,
   ...props
 }: ImageProps) {
   let imageElement;
@@ -43,6 +45,7 @@ export default function Image({
         src={src}
         width={width}
         height={height}
+        style={{ objectFit: objectFit }}
         className={className}
         {...props}
       />
@@ -77,6 +80,7 @@ export default function Image({
         placeholder="blur"
         loader={loader}
         layout={layout}
+        objectFit={objectFit}
         {...props}
       />
     );

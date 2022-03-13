@@ -1,0 +1,57 @@
+@use "styles/breakpoints.scss" as *;
+
+.WorkCard {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  padding: 1rem;
+  gap: 1rem;
+  z-index: 0;
+
+  @include breakpoint(sp) {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  @include breakpoint(pc) {
+  }
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  transform: scale(1.1);
+
+  filter: blur(0.5rem);
+}
+
+.backgroundBlur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+
+  z-index: -1;
+
+  background-color: var(--white);
+}
+
+.image {
+  display: block;
+  width: 50vw;
+
+  @include breakpoint(sp) {
+    width: unset;
+  }
+}

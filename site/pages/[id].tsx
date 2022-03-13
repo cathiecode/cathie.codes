@@ -4,6 +4,7 @@ import transformContentfulBody from "api/transformContentfulBody";
 import ArticleBody from "components/model/article/ArticleBody";
 import Hero from "components/model/article/Hero";
 import HeroTitle from "components/model/article/HeroTitle";
+import BreadClumbList from "components/model/global/BreadClumbList";
 import Page from "components/model/global/Page";
 import Container from "components/ui/Container";
 import { HastNode } from "mdast-util-to-hast/lib";
@@ -33,6 +34,7 @@ const PagePost: NextPage<PagePostProps> = ({
         </Hero>
         <Container>
           <ArticleBody body={article.body} />
+          <BreadClumbList pageTitle={article.title} />
         </Container>
       </article>
     </Page>
@@ -41,7 +43,9 @@ const PagePost: NextPage<PagePostProps> = ({
 
 export async function getStaticPaths() {
   return {
-    paths: (await fetchEntryList("page")).map((item: any) => `/${item.id}`),
+    paths: (await fetchEntryList("page")).map(
+      (item: any) => `/${item.fields.id}`
+    ),
     fallback: false,
   };
 }
@@ -58,8 +62,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   return injectGlobalContents({
     props: {
       article: {
-        title: entry.title,
-        body: await transformContentfulBody(entry.body),
+        title: entry.fields.title,
+        body: await transformContentfulBody(entry.fields.body),
       },
     },
   });

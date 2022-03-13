@@ -16,7 +16,6 @@ export default function Page({ children, globalContents }: PageProps) {
   return (
     <div className={styles.Page}>
       <GlobalContentsContext.Provider value={globalContents}>
-        <Header />
         <div className={styles.contents}>{children}</div>
         <Footer />
       </GlobalContentsContext.Provider>

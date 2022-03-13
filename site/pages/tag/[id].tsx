@@ -4,6 +4,7 @@ import { GlobalContents } from "api/fetchGlobalContents";
 import ArticleCard from "components/model/article/ArticleCard";
 import Hero from "components/model/article/Hero";
 import HeroTitle from "components/model/article/HeroTitle";
+import BreadClumbList from "components/model/global/BreadClumbList";
 import Page from "components/model/global/Page";
 import Container from "components/ui/Container";
 import Heading from "components/ui/Heading";
@@ -69,6 +70,7 @@ export function TagPage({
             <Notification>該当する記事がありません！</Notification>
           )}
         </section>
+        <BreadClumbList pageTitle={tagName} />
       </Container>
     </Page>
   );
@@ -113,14 +115,14 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         id: item.sys.id,
         title: item.fields.title,
         tags: item.metadata.tags,
-        coverImage: item.fields.coverImage,
+        coverImage: item.fields.coverImage ?? null,
         date: item.sys.createdAt,
       })),
       blogArticles: blogEntries.map((item) => ({
         id: item.sys.id,
         title: item.fields.title,
         tags: item.metadata.tags,
-        coverImage: item.fields.coverImage,
+        coverImage: item.fields.coverImage ?? null,
         date: item.sys.createdAt,
       })),
     },

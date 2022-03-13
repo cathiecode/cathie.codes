@@ -26,7 +26,7 @@ export default function DecoratedImage({
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   // eslint-disable-next-line jsx-a11y/alt-text
-  let imageElement = <Image src={src} {...props} />;
+  let imageElement = <Image src={src} className={styles.image} {...props} />;
 
   return (
     <div

@@ -8,6 +8,7 @@ import HeroTitle from "components/model/article/HeroTitle";
 import Page from "components/model/global/Page";
 import Container from "components/ui/Container";
 import { GetStaticPropsContext, NextPage } from "next";
+import Head from "next/head";
 import Link from "next/link";
 import { Tag } from "types/Tag";
 import injectGlobalContents from "utils/injectGlobalContents";

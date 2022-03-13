@@ -2,6 +2,7 @@ import fetchEntry from "api/fetchArticle";
 import fetchEntryList from "api/fetchEntryList";
 import { GlobalContents } from "api/fetchGlobalContents";
 import InlineFrame from "components/model/external/InlineFrame";
+import BreadClumbList from "components/model/global/BreadClumbList";
 import Page from "components/model/global/Page";
 import Container from "components/ui/Container";
 import { GetStaticPropsContext, NextPage } from "next";
@@ -22,6 +23,7 @@ const ExtPost: NextPage<ExtPostProps> = ({
     <Page globalContents={globalContents}>
       <Container>
         <InlineFrame src={url} />
+        <BreadClumbList pageTitle={title} />
       </Container>
     </Page>
   );
@@ -30,7 +32,7 @@ const ExtPost: NextPage<ExtPostProps> = ({
 export async function getStaticPaths() {
   return {
     paths: (await fetchEntryList("external")).map(
-      (item: any) => `/ext/${item.id}`
+      (item: any) => `/ext/${item.sys.id}`
     ),
     fallback: false,
   };

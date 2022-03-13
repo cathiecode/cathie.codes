@@ -9,7 +9,7 @@
 
   @include breakpoint(pc) {
     width: 100%;
-    margin: auto;
+    margin: 0 auto;
     max-width: 60rem;
   }
 }
