@@ -166,8 +166,10 @@
 }
 
 .tradeMarkWrapper:hover:before {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1.2) rotate(45deg);
+  @include breakpoint(pc) {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2) rotate(45deg);
+  }
 }
 
 .active .tradeMarkWrapper:before {
