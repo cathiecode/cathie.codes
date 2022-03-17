@@ -6,6 +6,7 @@ import Header from "components/model/global/Header";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <script>0</script>
       <PageLoader
         style={{
           position: "fixed",
