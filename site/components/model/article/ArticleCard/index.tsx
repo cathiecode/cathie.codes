@@ -29,7 +29,7 @@ export default function ArticleCard({
         {coverImage && (
           <Image
             src={coverImage.url}
-            blurDataUrl={coverImage.blurImageUrl}
+            blurDataURL={coverImage.blurImageUrl}
             layout="fill"
             objectFit="cover"
             alt=""

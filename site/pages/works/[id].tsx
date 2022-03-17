@@ -1,4 +1,5 @@
-import fetchEntry from "api/fetchArticle";
+import fetchEntry from "api/fetchEntry";
+import fetchEntryBySlug from "api/fetchEntryBySlug";
 import fetchEntryList from "api/fetchEntryList";
 import { GlobalContents } from "api/fetchGlobalContents";
 import ArticleBody from "components/model/article/ArticleBody";
@@ -12,7 +13,6 @@ import Page from "components/model/global/Page";
 import Container from "components/ui/Container";
 import Image from "components/ui/Image";
 import dayjs from "dayjs";
-import { url } from "inspector";
 import { HastNode } from "mdast-util-to-hast/lib";
 import { GetStaticPropsContext, NextPage } from "next";
 import { Tag } from "types/Tag";
@@ -50,7 +50,7 @@ const WorksPost: NextPage<WorksPostProps> = ({
           background={({ className }) => (
             <Image
               src={article.coverImage.url}
-              blurDataUrl={article.coverImage.blurImageUrl}
+              blurDataURL={article.coverImage.blurImageUrl}
               placeholder="blur"
               layout="fill"
               objectFit="cover"
@@ -72,8 +72,8 @@ const WorksPost: NextPage<WorksPostProps> = ({
           <HeroTags tags={article.tags} />
         </Hero>
         <Container>
-          <ArticleBody body={article.body} />
           <BreadClumbList pageTitle={article.title} />
+          <ArticleBody body={article.body} />
         </Container>
       </article>
     </Page>
@@ -83,7 +83,7 @@ const WorksPost: NextPage<WorksPostProps> = ({
 export async function getStaticPaths() {
   return {
     paths: (await fetchEntryList("work")).map(
-      (item: any) => `/works/${item.sys.id}`
+      (item: any) => `/works/${item.fields.slug}`
     ),
     fallback: false,
   };
@@ -96,7 +96,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
   const workId = context.params["id"];
 
-  const entry = await fetchEntry(workId as string);
+  const entry = await fetchEntryBySlug("work", workId as string);
 
   return injectGlobalContents({
     props: {

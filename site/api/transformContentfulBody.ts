@@ -71,7 +71,7 @@ export default async function transformContentfulBody(
             width: metadata?.width,
             height: metadata?.height,
             src: src,
-            blurDataUrl: resized,
+            blurDataURL: resized,
           });
         })()
       );

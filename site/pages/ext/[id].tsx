@@ -1,4 +1,4 @@
-import fetchEntry from "api/fetchArticle";
+import fetchEntry from "api/fetchEntry";
 import fetchEntryList from "api/fetchEntryList";
 import { GlobalContents } from "api/fetchGlobalContents";
 import InlineFrame from "components/model/external/InlineFrame";

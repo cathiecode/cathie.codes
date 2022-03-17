@@ -15,7 +15,6 @@
 .tradeMarkWrapper {
   top: 1rem;
   left: 1rem;
-
   display: inline-block;
   position: relative;
 }
@@ -29,6 +28,10 @@
 
   border-radius: 100%;
   box-shadow: var(--shadow);
+}
+
+.tradeMarkImage {
+  background-color: #cd9c70;
 }
 
 .logo {
@@ -79,7 +82,7 @@
   transition: background-color 180ms 250ms ease-out;
 
   @include breakpoint(sp) {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     padding: 1rem;
     border-radius: 0.5rem;
   }
@@ -97,7 +100,7 @@
   transition: background-color 180ms 250ms ease-out;
 
   @include breakpoint(sp) {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
   }
 
   @include breakpoint(pc) {

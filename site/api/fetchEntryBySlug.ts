@@ -1,14 +1,21 @@
 import { Tag } from "types/Tag";
 import contentful from "./contentful";
-import fetchContentful from "./fetchContenteful";
 import fetchContentfulTags from "./fetchContentfulTags";
 import transformAssetFields from "./transformAssetFields";
 import transformContentfulBody from "./transformContentfulBody";
 
-export default async function fetchEntry(entry_id: string) {
-  const response = (await contentful.parseEntries(
-    await contentful.getEntry(entry_id)
-  )) as any;
+export default async function fetchEntryBySlug(
+  contentTypeId: string,
+  slug: string
+) {
+  const response = (
+    (await contentful.parseEntries(
+      await contentful.getEntries({
+        "fields.slug": slug,
+        content_type: contentTypeId,
+      })
+    )) as any
+  ).items[0];
 
   const tagPool = await fetchContentfulTags();
 

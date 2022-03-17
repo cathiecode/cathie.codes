@@ -91,10 +91,9 @@ export default function Header() {
       <div className={styles.tradeMarkWrapper}>
         <button className={styles.tradeMark} onClick={onTrademarkClicked}>
           <Image
-            width={60}
-            height={60}
             layout="fill"
             src={icon}
+            placeholder="blur"
             alt=""
             className={styles.tradeMarkImage}
           />

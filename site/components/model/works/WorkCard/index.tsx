@@ -6,10 +6,13 @@ import Container from "components/ui/Container";
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
+import classNames from "classnames";
+import Button from "components/ui/Button";
 
 type WorkCardProps = {
   workArticle: {
     id: string;
+    slug: string;
     title: string;
     copyText: string;
     leadText: string;
@@ -23,38 +26,54 @@ type WorkCardProps = {
     };
     tags: Tag[];
   };
+  invert?: boolean;
 };
 
-export default function WorkCard({ workArticle }: WorkCardProps) {
+export default function WorkCard({ workArticle, invert }: WorkCardProps) {
   return (
-    <div className={styles.WorkCard}>
+    <div className={classNames(styles.WorkCard, { [styles.invert]: invert })}>
       <Image
         className={styles.background}
         alt={""}
         src={workArticle.coverImage.url}
+        blurDataURL={workArticle.coverImage.blurImageUrl}
         layout="fill"
         objectFit="cover"
       />
       <div className={styles.backgroundBlur}></div>
-      <div>
-        <div className={styles.descriptionColumn}>
-          <h2>{workArticle.title}</h2>
-          <p style={{ paddingTop: "1rem" }}>{workArticle.copyText}</p>
-          <p style={{ paddingTop: "1rem" }}>{workArticle.leadText}</p>
-          <p style={{ paddingTop: "1rem" }}>
-            <Link href={`/works/${workArticle.id}`}>
-              <a>{workArticle.title}について詳しく知る</a>
+      <div className={styles.description}>
+        <h2 style={{ fontSize: "2rem", fontWeight: "bold" }}>
+          <Link href={`/works/${workArticle.slug}`}>{workArticle.title}</Link>
+        </h2>
+        <p style={{ marginTop: "0.5rem" }}>
+          {workArticle.tags.map((tag) => (
+            <Link href={`/tag/${tag.id}`} key={tag.id}>
+              <a className={styles.tag}>{tag.name}</a>
             </Link>
-          </p>
-        </div>
+          ))}
+        </p>
+        <p style={{ fontSize: "0.9rem", marginTop: "1rem" }}>
+          {workArticle.copyText}
+        </p>
+        <p style={{ marginTop: "1.5rem" }}>{workArticle.leadText}</p>
+        <p style={{ marginTop: "1.5rem" }}>
+          <Link href={`/works/${workArticle.slug}`}>
+            <a>
+              <Button>もっと見る</Button>
+            </a>
+          </Link>
+        </p>
       </div>
-      <Image
-        alt={""}
-        src={workArticle.coverImage.url}
-        layout="fill"
-        objectFit="contain"
-        className={styles.image}
-      />
+      <div className={styles.image}>
+        <Image
+          alt={""}
+          src={workArticle.coverImage.url}
+          width={workArticle.coverImage.width}
+          height={workArticle.coverImage.height}
+          blurDataURL={workArticle.coverImage.blurImageUrl}
+          objectFit="contain"
+        />
+      </div>
     </div>
   );
 }

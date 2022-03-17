@@ -40,6 +40,9 @@
   background-image: url("../../../assets/wave-background.svg");
   background-clip: text;
   background-size: cover;
+  line-height: 1em;
+  padding: 0.2em;
+  font-weight: bold;
 }
 
 .heroIconicAnimationLeft {

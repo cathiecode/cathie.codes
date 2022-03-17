@@ -1,4 +1,4 @@
-import fetchEntry from "api/fetchArticle";
+import fetchEntry from "api/fetchEntry";
 import fetchEntryList from "api/fetchEntryList";
 import { GlobalContents } from "api/fetchGlobalContents";
 import ArticleBody from "components/model/article/ArticleBody";
@@ -47,7 +47,7 @@ const BlogPost: NextPage<BlogPostProps> = ({
             article.coverImage && (
               <Image
                 src={article.coverImage?.url}
-                blurDataUrl={article.coverImage?.blurImageUrl}
+                blurDataURL={article.coverImage?.blurImageUrl}
                 placeholder="blur"
                 layout="fill"
                 objectFit="cover"
@@ -64,8 +64,8 @@ const BlogPost: NextPage<BlogPostProps> = ({
           <HeroTags tags={article.tags} />
         </Hero>
         <Container>
-          <ArticleBody body={article.body} />
           <BreadClumbList pageTitle={article.title} />
+          <ArticleBody body={article.body} />
         </Container>
       </article>
     </Page>

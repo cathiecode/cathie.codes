@@ -20,7 +20,7 @@ export default async function hastAddBlurDataUrl(rewriteTarget: HastNode) {
       promiseList.push(
         getResizedImage(source).then((resized) => {
           if (node.properties) {
-            node.properties["blurDataUrl"] = resized;
+            node.properties["blurDataURL"] = resized;
           }
         })
       );

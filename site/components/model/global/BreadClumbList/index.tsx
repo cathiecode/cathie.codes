@@ -1,5 +1,6 @@
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "./styles.module.css";
@@ -8,6 +9,7 @@ const pathTitle: { [key: string]: string } = {
   works: "作品",
   blog: "日記",
   ext: "外部参照",
+  tag: "タグ",
 };
 
 type BreadClumbListProps = {
@@ -51,6 +53,16 @@ export default function BreadClumbList({
           </Link>
         </>
       ))}
+      <Head>
+        <title>
+          {breadClumb
+            .reverse()
+            .map(([url, title], i) =>
+              i === 0 && pageTitle ? pageTitle : title
+            )
+            .join(" | ")}
+        </title>
+      </Head>
     </div>
   );
 }

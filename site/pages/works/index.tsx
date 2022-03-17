@@ -5,6 +5,7 @@ import Hero from "components/model/article/Hero";
 import HeroHorizontalLine from "components/model/article/HeroHorizontalLine";
 import HeroText from "components/model/article/HeroText";
 import HeroTitle from "components/model/article/HeroTitle";
+import BreadClumbList from "components/model/global/BreadClumbList";
 import Page from "components/model/global/Page";
 import WorkCard from "components/model/works/WorkCard";
 import Container from "components/ui/Container";
@@ -15,6 +16,7 @@ import injectGlobalContents from "utils/injectGlobalContents";
 
 type WorksArticleMetadata = {
   id: string;
+  slug: string;
   title: string;
   copyText: string;
   leadText: string;
@@ -26,6 +28,7 @@ type WorksArticleMetadata = {
     width: number;
     height: number;
   };
+  order: number;
   tags: Tag[];
 };
 
@@ -45,9 +48,14 @@ const WorksPost: NextPage<WorksPostProps> = ({
         <HeroHorizontalLine />
         <HeroText>作品カテゴリの記事の一覧です！</HeroText>
       </Hero>
-      {articles.map((article) => (
-        <WorkCard key={article.id} workArticle={article} />
-      ))}
+      {articles
+        .sort((a, b) => a.order - b.order)
+        .map((article) => (
+          <WorkCard key={article.id} workArticle={article} />
+        ))}
+      <Container>
+        <BreadClumbList />
+      </Container>
     </Page>
   );
 };
@@ -59,6 +67,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     props: {
       articles: entries.map((item: any) => ({
         id: item.sys.id,
+        slug: item.fields.slug,
         title: item.fields.title,
         tags: item.metadata.tags,
         date: item.sys.createdAt,
@@ -66,6 +75,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         dateStart: item.fields.dateStart,
         dateEnd: item.fields.dateEnd,
         copyText: item.fields.copyText,
+        order: parseInt(item.fields.order ?? "1000"),
         coverImage: item.fields.coverImage ?? null,
       })),
     },

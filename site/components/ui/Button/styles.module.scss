@@ -1,0 +1,29 @@
+@use "styles/breakpoints.scss" as *;
+
+.Button {
+  display: inline-block;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: solid 0.1rem var(--black);
+  font-weight: bold;
+  transition: background-color linear 250ms, color linear 250ms;
+
+  @include breakpoint(pc) {
+    background-color: transparent;
+    color: var(--black);
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+      border: solid 0.1rem var(--red);
+      color: var(--white);
+      background-color: var(--red);
+      outline: none;
+    }
+  }
+
+  @include breakpoint(sp) {
+    background-color: var(--black);
+    color: var(--white);
+  }
+}
