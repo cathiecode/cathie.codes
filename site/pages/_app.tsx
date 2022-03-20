@@ -7,6 +7,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <script>0</script>
+      {/* NOTE: FOUC対策 */}
       <PageLoader
         style={{
           position: "fixed",
