@@ -1,8 +1,13 @@
-import fetchGlobalContents from "api/fetchGlobalContents";
+import fetchGlobalContents, { GlobalContents } from "api/fetchGlobalContents";
 
 export default async function injectGlobalContents<T extends { props: any }>(
   original: T
-): Promise<T> {
+): Promise<
+  { props: Extract<T, "props"> & { globalContents: GlobalContents } } & Omit<
+    T,
+    "props"
+  >
+> {
   return {
     ...original,
     props: {

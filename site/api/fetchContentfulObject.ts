@@ -4,7 +4,7 @@ export default async function fetchContentful(
   if (
     !process.env.CONTENTFUL_SPACE_ID ||
     !process.env.CONTENTFUL_ACCESS_TOKEN ||
-    !process.env.CONTENTFUL_ENVIRONMENT_ID
+    !process.env.CONTENTFUL_ENVIRONMENT
   ) {
     throw new Error(
       "contentful space id, access token or environment key was not specified."
@@ -13,7 +13,7 @@ export default async function fetchContentful(
 
   const path = pathGenerator({
     space_id: process.env.CONTENTFUL_SPACE_ID,
-    environment_id: process.env.CONTENTFUL_ENVIRONMENT_ID,
+    environment_id: process.env.CONTENTFUL_ENVIRONMENT,
   });
 
   const normalizedPath = path.startsWith("/") ? path.slice(1) : path;
